@@ -1,0 +1,30 @@
+@import 'primereact/resources/themes/lara-light-indigo/theme.css'; //theme
+@import 'primereact/resources/primereact.min.css'; //core css
+@import 'primeicons/primeicons.css'; //icons
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
