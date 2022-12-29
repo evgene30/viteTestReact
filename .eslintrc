@@ -20,13 +20,23 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier",
     "prettier/react",
     "prettier/@typescript-eslint",
+    "plugin:sonarjs/recommended",
+    "eslint:recommended",
     "plugin:prettier/recommended",
-    "plugin:sonarjs/recommended"
+    "prettier"
   ],
-  "plugins": ["react", "react-hooks", "jsx-a11y", "@typescript-eslint", "prettier", "sonarjs"],
+  "plugins": [
+    "eslint-plugin-import-helpers",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "@typescript-eslint",
+    "sonarjs",
+    "import",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -34,9 +44,13 @@
     },
     "ecmaVersion": 2018,
     "sourceType": "module",
+    "parser": "@typescript-eslint/parser",
     "project": "./tsconfig.json"
   },
   "rules": {
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "import/no-relative-parent-imports": "off",
     "import/prefer-default-export": 0,
     "padding-line-between-statements": [
       "warn",
@@ -56,11 +70,12 @@
       }
     ],
     "react/require-default-props": "off",
-    "linebreak-style": "off",
     "prettier/prettier": ["error"],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/setupTests.ts"] }
+      {
+        "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/setupTests.ts"]
+      }
     ],
     "max-len": [
       "warn",
@@ -82,7 +97,10 @@
     "sonarjs/no-duplicated-branches": "off",
     "sonarjs/no-duplicate-string": "off",
     "sonarjs/no-identical-functions": "off",
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state"] }
+    ],
     "sonarjs/cognitive-complexity": ["error", 49],
     "import/no-deprecated": "warn",
     "jsx-a11y/label-has-associated-control": "off",
@@ -91,14 +109,25 @@
     "jsx-a11y/no-static-element-interactions": [
       "error",
       {
-        "handlers": ["onMouseDown", "onMouseUp", "onKeyPress", "onKeyDown", "onKeyUp"]
+        "handlers": [
+          "onMouseDown",
+          "onMouseUp",
+          "onKeyPress",
+          "onKeyDown",
+          "onKeyUp"
+        ]
       }
     ],
     "@typescript-eslint/no-unsafe-member-access": "off",
     "no-return-await": "off",
     "no-await-in-loop": "off",
     "@typescript-eslint/return-await": "warn",
-    "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"]
+    "no-restricted-syntax": [
+      "error",
+      "WithStatement",
+      "BinaryExpression[operator='in']"
+    ],
+    "import/extensions": "off"
   },
   "overrides": [
     {
@@ -118,4 +147,3 @@
     }
   ]
 }
-

@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
-import './App.scss';
-import { Input } from './components/Input';
+import { ThemeProvider } from '@mui/material/styles';
+import { RouterProvider } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
+import theme from './theme';
+import { router } from './routes/router';
 
 const App: FC = () => (
-  <div className="App">
-    <Input />
-  </div>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <RouterProvider router={router} fallbackElement={null} />
+  </ThemeProvider>
 );
+
 export default App;
