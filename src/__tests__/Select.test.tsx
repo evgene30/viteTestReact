@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { expect } from '@jest/globals';
-import { SelectLabels } from '.';
+import { SelectLabels } from '../components/select';
 
 describe('SelectLabels', () => {
   render(<SelectLabels />);

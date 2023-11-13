@@ -8,7 +8,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import { formStyles } from './style';
-import { useSelect } from '@/store';
+import { useSelect } from '../../store';
 
 export type Option = {
   id: string;

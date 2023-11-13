@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Stack, Pagination } from '@mui/material';
-import { paginationStyles } from '@/components/pagination/styles';
+import { paginationStyles } from './styles';
 
 type TPaginationComponent = {
   page: number;
@@ -18,6 +18,7 @@ export const PaginationComponent: FC<TPaginationComponent> = ({
   return (
     <Stack spacing={2} sx={paginationStyles}>
       <Pagination
+        data-testid="pagination-component"
         count={7}
         variant="outlined"
         shape="rounded"
