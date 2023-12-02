@@ -29,6 +29,15 @@ export const white = {
       },
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+  },
 };
 
 const theme = createTheme(white);
