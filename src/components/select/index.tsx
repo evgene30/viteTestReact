@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   FormControl,
@@ -31,40 +31,49 @@ const options: Option[] = [
   { id: '2', value: 'option2', label: 'Option 2' },
   { id: '3', value: 'option3', label: 'Option 3' },
 ];
+
+type TOptionState = { selectedOption: Option | string; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const {
     control,
-    getValues,
+    watch,
     formState: { errors },
-  } = useForm<{ Option: string; switch: boolean }>({
+  } = useForm<TOptionState>({
     mode: 'onChange',
     defaultValues: {
-      Option: '',
+      selectedOption: '',
       switch: true,
     },
   });
 
+  useEffect(() => {
+    const subscription = watch((value) => setData(value as never));
+
+    return () => subscription.unsubscribe();
+  }, [setData, watch]);
+
   return (
-    <form onChange={() => setData(getValues())}>
+    <form>
       <Box sx={formStyles}>
         <Box sx={selectStyles}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Options</InputLabel>
             <Controller
-              name="Option"
+              name="selectedOption"
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
+              render={({ field: { onChange, value, ...field } }) => (
                 <Select
-                  sx={{ position: 'relative' }}
-                  error={!!errors.Option}
-                  labelId="demo-simple-select-label"
-                  label="Option"
+                  {...field}
+                  value={(value as Option).value || ''}
                   onChange={(e) => {
-                    field.onChange(e.target.value);
-                    setData(getValues());
+                    const selected = options.find(
+                      (option) => option.value === e.target.value,
+                    );
+                    if (selected) {
+                      onChange(selected);
+                    }
                   }}
-                  value={field.value}
+                  label="Options"
                 >
                   {options.map((option) => (
                     <MenuItem key={option.id} value={option.value}>
@@ -74,7 +83,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
                 </Select>
               )}
             />
-            {errors.Option && (
+            {errors.selectedOption && (
               <Typography color="error" sx={errorStyles}>
                 Error choice
               </Typography>
