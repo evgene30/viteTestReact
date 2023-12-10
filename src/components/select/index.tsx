@@ -49,7 +49,9 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   useEffect(() => {
     const subscription = watch((value) => setData(value as never));
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [setData, watch]);
 
   return (
@@ -93,10 +95,10 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
             <Controller
               name="switch"
               control={control}
-              render={({ field }) => (
+              render={({ field: { value, ...field } }) => (
                 <Switch
                   {...field}
-                  checked={field.value}
+                  checked={value}
                   onChange={(e) => field.onChange(e.target.checked)}
                 />
               )}
