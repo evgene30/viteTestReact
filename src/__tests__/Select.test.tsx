@@ -4,7 +4,7 @@ import { expect } from '@jest/globals';
 import { SelectLabels } from '../components/select';
 
 describe('SelectLabels', () => {
-  render(<SelectLabels />);
+  render(<SelectLabels setData={() => null} />);
   test('snapshot SelectLabels component', () => {
     const defaultValue = '+ Add Filter';
     const selectedValue = screen.getByText(defaultValue);
