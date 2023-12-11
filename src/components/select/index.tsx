@@ -18,7 +18,7 @@ import {
 
 export type Option = {
   id: string;
-  value: string;
+  value?: string;
   label: string;
 };
 
@@ -32,7 +32,7 @@ const options: Option[] = [
   { id: '3', value: 'option3', label: 'Option 3' },
 ];
 
-type TOptionState = { selectedOption: Option | string; switch: boolean };
+type TOptionState = { selectedOption: Array<Option>; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const {
     control,
@@ -41,7 +41,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   } = useForm<TOptionState>({
     mode: 'onChange',
     defaultValues: {
-      selectedOption: '',
+      selectedOption: [],
       switch: true,
     },
   });
@@ -66,19 +66,27 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
               render={({ field: { onChange, value, ...field } }) => (
                 <Select
                   {...field}
-                  value={(value as Option).value || ''}
+                  multiple
+                  value={value || []}
                   onChange={(e) => {
-                    const selected = options.find(
-                      (option) => option.value === e.target.value,
-                    );
-                    if (selected) {
-                      onChange(selected);
-                    }
+                    const selectedOptions = e.target.value;
+                    onChange(selectedOptions);
                   }}
                   label="Options"
+                  renderValue={(selectedIds) => {
+                    const selectedValues = selectedIds.map((id) => {
+                      const option = options.find(
+                        (o: Option) => o.id === (id as never),
+                      );
+
+                      return option ? option.label : '';
+                    });
+
+                    return selectedValues.join(', ');
+                  }}
                 >
                   {options.map((option) => (
-                    <MenuItem key={option.id} value={option.value}>
+                    <MenuItem key={option.id} value={option.id}>
                       {option.label}
                     </MenuItem>
                   ))}
