@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-void */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -117,14 +119,8 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
                     option.id === dataVal.id
                   }
                   clearIcon={false}
-                  // isOptionEqualToValue={(option, dataVal) => {
-                  //   if (option.title === dataVal.title) {
-                  //     reset();
-                  //   }
-
-                  //   return option.title === dataVal.title;
-                  // }}
-                  inputValue={value.title || ''}
+                  // @ts-ignore
+                  inputValue={value['title'] || ''}
                   options={options}
                   clearOnEscape
                   getOptionLabel={(option) => option.title}
