@@ -1,44 +1,40 @@
 import { useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import { debounce, DebouncedFunc } from 'lodash';
+import { useMutation } from 'react-query';
+import { debounce } from 'lodash';
+import axios from 'axios';
 
-type TData = { id: number; value: string };
+type TData = {
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
+};
+const myData: TData = {
+  title: 'test product',
+  price: 13.5,
+  description: 'lorem ipsum set',
+  image: 'https://i.pravatar.cc',
+  category: 'electronic',
+};
 
-const useQuery = () => {
-  const myData: TData = { id: 1, value: '4' };
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation(
-    (newData) =>
-      fetch('/api/data', {
-        method: 'POST',
-        body: JSON.stringify(newData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-    {
-      onSuccess: () => {
-        void queryClient.invalidateQueries('data');
-      },
-    },
+export const useQueryData = () => {
+  const mutation = useMutation((sendData: TData) =>
+    axios.post('https://fakestoreapi.com/products', sendData),
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  const debouncedMutation: DebouncedFunc<(data: TData) => void> = debounce(
-    (data: TData) => {
-      void mutation.mutate(data as never);
-    },
-    300,
-  );
+  const debouncedMutation = debounce((data: TData) => {
+    void mutation.mutate(data);
+  }, 300);
 
   useEffect(() => {
     if (myData) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       debouncedMutation(myData);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-return
     return () => debouncedMutation.cancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myData]);
+
+  return mutation;
 };

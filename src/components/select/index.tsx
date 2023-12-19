@@ -20,6 +20,7 @@ import {
   selectStyles,
   switchStyles,
 } from '@/components/select/style';
+import { useQueryData } from '../hooks/useQuery';
 
 export type Option = {
   id: string;
@@ -39,6 +40,8 @@ const potions: Option[] = [
 
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
+  const { data: queryData } = useQueryData();
+  console.log(queryData?.data);
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState<Option[]>(potions);
   const [open, setOpen] = React.useState(false);
