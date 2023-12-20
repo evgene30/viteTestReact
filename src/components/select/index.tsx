@@ -7,7 +7,6 @@ import {
   Autocomplete,
   Box,
   Button,
-  CircularProgress,
   FormControl,
   Switch,
   TextField,
@@ -41,9 +40,8 @@ const potions: Option[] = [
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const { data: queryData } = useQueryData();
-  console.log(queryData?.data);
   const [checked, setChecked] = useState(false);
-  const [options, setOptions] = useState<Option[]>(potions);
+  const [options, setOptions] = useState<string[]>([]);
   const [open, setOpen] = React.useState(false);
   const loading = open && checked && options.length === 0;
 
@@ -106,6 +104,44 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
             <Controller
               name="selectedOption"
               control={control}
+              rules={{
+                required: 'this field is required',
+              }}
+              render={({ field, fieldState: { error } }) => {
+                const { onChange, value, ref, name } = field;
+
+                return (
+                  <Autocomplete
+                    color="danger"
+                    value={
+                      value
+                        ? options.find((option) => value === option.id) ?? null
+                        : null
+                    }
+                    getOptionLabel={(option) => option.label}
+                    filterOptions={(opts, state) =>
+                      opts.filter((opt) => opt.label.includes(state.inputValue))
+                    }
+                    onChange={(e, newValue) => {
+                      onChange(newValue ? newValue.id : null);
+                    }}
+                    id="controllable-states-demo"
+                    options={potions}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label={name}
+                        inputRef={ref}
+                        error={!!error}
+                      />
+                    )}
+                  />
+                );
+              }}
+            />
+            {/* <Controller
+              name="selectedOption"
+              control={control}
               render={({ field: { onChange, value, name, ...field } }) => (
                 <Autocomplete
                   {...field}
@@ -147,9 +183,9 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
                   onChange={(e, data) => {
                     onChange(data);
                   }}
-                />
-              )}
-            />
+                /> */
+            /* )}
+            /> */}
             {errors.selectedOption && (
               <Typography color="error" sx={errorStyles}>
                 Error choice
