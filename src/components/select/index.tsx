@@ -19,7 +19,6 @@ import {
   selectStyles,
   switchStyles,
 } from '@/components/select/style';
-import { useQueryData } from '../hooks/useQuery';
 
 export type Option = {
   id: string;
@@ -39,17 +38,16 @@ const potions: Option[] = [
 
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
-  const { data: queryData } = useQueryData();
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState<string[]>([]);
-  const [open, setOpen] = React.useState(false);
+  const [open] = React.useState(false);
   const loading = open && checked && options.length === 0;
 
   const {
     control,
     watch,
     resetField,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<TOptionState>({
     mode: 'onChange',
     defaultValues: {
@@ -92,7 +90,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
       setOptions([]);
     }
     if (!checked) {
-      setOptions(potions);
+      setOptions(potions as never);
     }
   }, [checked, open]);
 
@@ -112,10 +110,11 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
 
                 return (
                   <Autocomplete
-                    color="danger"
                     value={
                       value
-                        ? options.find((option) => value === option.id) ?? null
+                        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          options.find((option: any) => value === option.id) ??
+                          null
                         : null
                     }
                     getOptionLabel={(option) => option.label}
@@ -139,53 +138,6 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
                 );
               }}
             />
-            {/* <Controller
-              name="selectedOption"
-              control={control}
-              render={({ field: { onChange, value, name, ...field } }) => (
-                <Autocomplete
-                  {...field}
-                  open={open}
-                  onOpen={() => {
-                    setOpen(true);
-                  }}
-                  onClose={() => {
-                    setOpen(false);
-                  }}
-                  loading={loading}
-                  fullWidth
-                  isOptionEqualToValue={(option, dataVal) =>
-                    option.id === dataVal.id
-                  }
-                  clearIcon={false}
-                  // @ts-ignore
-                  inputValue={value['title'] || ''}
-                  options={options}
-                  clearOnEscape
-                  getOptionLabel={(option) => option.title}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label={name}
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <>
-                            {loading ? (
-                              <CircularProgress color="inherit" size={20} />
-                            ) : null}
-                            {params.InputProps.endAdornment}
-                          </>
-                        ),
-                      }}
-                    />
-                  )}
-                  onChange={(e, data) => {
-                    onChange(data);
-                  }}
-                /> */
-            /* )}
-            /> */}
             {errors.selectedOption && (
               <Typography color="error" sx={errorStyles}>
                 Error choice
@@ -207,6 +159,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
             <Typography fontSize={14}>Check option</Typography>
           </Box>
           <Button
+            disabled={!isValid}
             onClick={() => {
               setChecked(!checked);
               resetField('selectedOption', { defaultValue: [] });
