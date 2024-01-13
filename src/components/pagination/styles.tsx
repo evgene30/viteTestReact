@@ -1,6 +1,6 @@
-import { CSSObject, Theme } from '@mui/material';
+import { CSSObject } from '@mui/material';
 
-export const paginationStyles = (theme: Theme): CSSObject => ({
+export const paginationStyles = (): CSSObject => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
