@@ -13,7 +13,7 @@ const initialState: TCounterState = {
   },
   testSettings: {
     pagination: {
-      oneTable: {
+      init: {
         offset: 10,
       },
     },

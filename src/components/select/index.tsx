@@ -45,7 +45,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const [open] = React.useState(false);
   const loading = open && checked && options.length === 0;
 
-  const dataSettings = useSelector(getSettings({ keyPrimary: 'testSettings' }));
+  const dataSettings = useSelector(getSettings({ keyPrimary: 'testSetting' }));
 
   console.log(dataSettings);
 

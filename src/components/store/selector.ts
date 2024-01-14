@@ -10,8 +10,8 @@ export const getSettings = ({ keyPrimary, addKey }: TUnicKey): Selector =>
         return testState[keyPrimary].pagination[addKey];
       }
 
-      return testState[keyPrimary].pagination;
+      return testState[keyPrimary].pagination.init;
     }
 
-    return testState.defaultSettings.pagination;
+    return testState.defaultSettings.pagination.init;
   });
