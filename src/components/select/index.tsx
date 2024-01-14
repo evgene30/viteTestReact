@@ -13,12 +13,14 @@ import {
   Typography,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import {
   errorStyles,
   formStyles,
   selectStyles,
   switchStyles,
 } from '@/components/select/style';
+import { getSettings } from '../store/selector';
 
 export type Option = {
   id: string;
@@ -42,6 +44,10 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const [options, setOptions] = useState<string[]>([]);
   const [open] = React.useState(false);
   const loading = open && checked && options.length === 0;
+
+  const dataSettings = useSelector(getSettings({ keyPrimary: 'testSettings' }));
+
+  console.log(dataSettings);
 
   const {
     control,
