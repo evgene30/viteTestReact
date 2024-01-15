@@ -4,17 +4,18 @@ type TSort = { fieldId: string | null; sort: string | null };
 export const SortableTable = () => {
   const [sortConfig, setSortConfig] = useState([]);
   console.log(sortConfig);
-
   const requestSort = (fieldId: string) => {
     setSortConfig((currentSortConfig) => {
       const updatedSortConfig = [...currentSortConfig];
       const existingSortIndex = updatedSortConfig.findIndex(
         (config) => config.fieldId === fieldId,
       );
-
+      console.log(updatedSortConfig[existingSortIndex]?.sort);
       if (existingSortIndex > -1) {
         if (updatedSortConfig[existingSortIndex].sort === 'asc') {
           updatedSortConfig[existingSortIndex].sort = 'desc';
+        } else if (updatedSortConfig[existingSortIndex].sort === 'desc') {
+          updatedSortConfig[existingSortIndex].sort = null;
         } else if (updatedSortConfig[existingSortIndex].sort === null) {
           updatedSortConfig.splice(existingSortIndex, 1);
         }
