@@ -1,4 +1,5 @@
 import React from 'react';
+import { About } from '@/pages/about/About';
 
 export type TRoutes = { [key: string]: string };
 
@@ -12,5 +13,5 @@ export const menuLinks = Object.keys(routes).map((key) => ({
   title: key,
   link: routes[key],
   path: key.toLocaleLowerCase(),
-  element: <div>{key}</div>,
+  element: key === 'About' ? <About /> : <div>{key}</div>,
 }));
