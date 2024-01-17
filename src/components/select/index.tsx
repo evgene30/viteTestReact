@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/dot-notation */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable no-void */
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
   Autocomplete,
   Box,
@@ -13,14 +9,12 @@ import {
   Typography,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import {
   errorStyles,
   formStyles,
   selectStyles,
   switchStyles,
 } from '@/components/select/style';
-import { getSettings } from '../store/selector';
 
 export type Option = {
   id: string;
@@ -41,17 +35,10 @@ const potions: Option[] = [
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
 export const SelectLabels = ({ setData }: SelectLabelsProps) => {
   const [checked, setChecked] = useState(false);
-  const [options, setOptions] = useState<string[]>([]);
-  const [open] = React.useState(false);
-  const loading = open && checked && options.length === 0;
-
-  const dataSettings = useSelector(getSettings({ keyPrimary: 'testSetting' }));
-
-  console.log(dataSettings);
+  const [options, setOptions] = useState<Option[]>([]);
 
   const {
     control,
-    watch,
     resetField,
     formState: { errors, isValid },
   } = useForm<TOptionState>({
@@ -61,44 +48,6 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
       switch: true,
     },
   });
-
-  useEffect(() => {
-    const subscription = watch((value) => {
-      setData(value as never);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [setData, watch]);
-
-  useEffect(() => {
-    let active = true;
-
-    if (!loading) {
-      return undefined;
-    }
-
-    void (async () => {
-      const { data } = await axios.get('https://fakestoreapi.com/products');
-      if (active) {
-        setOptions([...data]);
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  useEffect(() => {
-    if (!open && checked) {
-      setOptions([]);
-    }
-    if (!checked) {
-      setOptions(potions as never);
-    }
-  }, [checked, open]);
 
   return (
     <form>
@@ -118,9 +67,9 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
                   <Autocomplete
                     value={
                       value
-                        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          options.find((option: any) => value === option.id) ??
-                          null
+                        ? options.find(
+                            (option: Option) => String(value) === option.id,
+                          ) ?? null
                         : null
                     }
                     getOptionLabel={(option) => option.label}
