@@ -9,9 +9,20 @@ export const routes: TRoutes = {
   Work: '/work',
 };
 
+const getComponent = (key: string) => {
+  switch (key) {
+    case 'About':
+      return <About />;
+    case 'Work':
+      return <div>W1</div>;
+    default:
+      return <div>{key}</div>;
+  }
+};
+
 export const menuLinks = Object.keys(routes).map((key) => ({
   title: key,
   link: routes[key],
   path: key.toLocaleLowerCase(),
-  element: key === 'About' ? <About /> : <div>{key}</div>,
+  element: getComponent(key),
 }));
