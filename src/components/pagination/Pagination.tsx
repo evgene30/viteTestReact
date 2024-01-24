@@ -16,7 +16,7 @@ export const PaginationComponent: FC<TPaginationComponent> = ({
   };
 
   return (
-    <Stack spacing={2} sx={paginationStyles}>
+    <Stack spacing={2} sx={paginationStyles as never}>
       <Pagination
         data-testid="pagination-component"
         count={7}
