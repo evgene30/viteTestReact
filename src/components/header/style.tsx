@@ -1,6 +1,6 @@
 import { CSSObject, InputBase, Theme, alpha, styled } from '@mui/material';
 
-export const headerStyle = (theme: Theme): CSSObject => ({
+export const headerStyle = (theme: Theme) => ({
   height: 40,
   boxShadow: 'none',
   display: 'flex',
@@ -63,7 +63,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const buttonHeader = (): CSSObject => ({
+export const buttonHeader = () => ({
   ':hover': {
     opacity: 0.6,
     transition: '0.6s',
