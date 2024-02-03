@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 
 type TSort = { fieldId: string | null; sort: string | null };
 export const SortableTable = () => {
-  const [sortConfig, setSortConfig] = useState([]);
-  console.log(sortConfig);
+  const [sortConfig, setSortConfig] = useState<Array<TSort>>([]);
+
   const requestSort = (fieldId: string) => {
     setSortConfig((currentSortConfig) => {
       const updatedSortConfig = [...currentSortConfig];
       const existingSortIndex = updatedSortConfig.findIndex(
         (config) => config.fieldId === fieldId,
       );
-      console.log(updatedSortConfig[existingSortIndex]?.sort);
       if (existingSortIndex > -1) {
         if (updatedSortConfig[existingSortIndex].sort === 'asc') {
           updatedSortConfig[existingSortIndex].sort = 'desc';
@@ -37,28 +36,32 @@ export const SortableTable = () => {
         return (
           <th key={fieldId} onClick={() => requestSort(fieldId)}>
             {fieldId.toUpperCase()}
-            {currentSortConfig
-              ? currentSortConfig.sort === 'asc'
-                ? ' ↑'
-                : ' ↓'
-              : ''}
+            {currentSortConfig &&
+              (currentSortConfig.sort === 'asc' ? ' ↑' : ' ↓')}
           </th>
         );
       })}
     </tr>
   );
-  const renderTableRows = () => {
-    const sortedData = [...sortConfig];
-    if (sortConfig.sort !== null) {
+
+  const renderTableRows = (sortConf: TSort[]) => {
+    const sortedData = [...sortConf];
+    if (sortedData.sort !== null) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       sortedData.sort((a, b) => {
-        if (a[sortConfig.fieldId] < b[sortConfig.fieldId]) {
-          return sortConfig.sort === 'asc' ? -1 : 1;
+        if (String(a.fieldId) < String(b.fieldId)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          return sortedData.sort === 'asc' ? -1 : 1;
         }
-        if (a[sortConfig.fieldId] > b[sortConfig.fieldId]) {
-          return sortConfig.sort === 'asc' ? 1 : -1;
+        if (String(a.fieldId) > String(b.fieldId)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          return sortedData.sort === 'asc' ? 1 : -1;
         }
 
-        return 0;
+        return '';
       });
     }
 
@@ -72,7 +75,7 @@ export const SortableTable = () => {
   return (
     <table>
       <thead>{renderTableHeader()}</thead>
-      <tbody>{renderTableRows()}</tbody>
+      <tbody>{renderTableRows(sortConfig)}</tbody>
     </table>
   );
 };

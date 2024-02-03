@@ -1,6 +1,4 @@
-import { CSSObject, Theme } from '@mui/material';
-
-export const noResultStyles = (theme: Theme): CSSObject => ({
+export const noResultStyles = () => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

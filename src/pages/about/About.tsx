@@ -5,6 +5,7 @@ import {
   TextField,
   Autocomplete,
   AutocompleteProps,
+  AutocompleteRenderInputParams,
 } from '@mui/material';
 import { aboutStyle } from './style';
 
@@ -39,9 +40,5 @@ export const About = () => {
     options: ['1', '3'],
   });
 
-  return (
-    <Box sx={aboutStyle as never}>
-      <AutocompleteComponent />
-    </Box>
-  );
+  return <Box sx={aboutStyle} />;
 };
