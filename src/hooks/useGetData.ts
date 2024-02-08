@@ -25,7 +25,7 @@ export function useCustomHook(init: string): TuesCustomHook {
   const [value] = useState(init);
 
   const someFunction = () => {
-    const pageItems = paginate(itemsData, 1, 20); // текущая страница, кол-во элементов на странице
+    const pageItems = paginate(itemsData, 1, 3); // текущая страница, кол-во элементов на странице
 
     console.log(pageItems);
   };
