@@ -1,44 +1,24 @@
-import React from 'react';
-import {
-  Box,
-  Button,
-  TextField,
-  Autocomplete,
-  AutocompleteProps,
-  AutocompleteRenderInputParams,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Box } from '@mui/material';
 import { aboutStyle } from './style';
+import { useCustomHook } from '@/hooks/useGetData';
 
 export const About = () => {
-  function createMuiComponent<T>(
-    Component: React.ComponentType<T>,
-    defaultProps: T,
-  ) {
-    return function MuiComponent(props: T & React.Attributes) {
-      return <Component {...defaultProps} {...props} />;
-    };
-  }
+  const [initValue, setInitValue] = useState('1');
 
-  const PrimaryButton = createMuiComponent(Button, {
-    variant: 'contained',
-    color: 'primary',
-  });
-  const SecondaryButton = createMuiComponent(Button, {
-    variant: 'outlined',
-    color: 'secondary',
-  });
-  const DefaultTextField = createMuiComponent(TextField, {
-    variant: 'outlined',
-  });
+  const { value, someFunction } = useCustomHook(initValue);
 
-  const AutocompleteComponent = createMuiComponent<
-    AutocompleteProps<unknown, boolean, boolean, boolean>
-  >(Autocomplete, {
-    renderInput: (params) => (
-      <TextField {...params} label="Выберите вариант" variant="outlined" />
-    ),
-    options: ['1', '3'],
-  });
+  const handleClick = () => {
+    setInitValue('2');
 
-  return <Box sx={aboutStyle} />;
+    someFunction('3');
+  };
+
+  return (
+    <Box sx={aboutStyle}>
+      <Button onClick={handleClick} variant="outlined">
+        Click
+      </Button>
+    </Box>
+  );
 };
