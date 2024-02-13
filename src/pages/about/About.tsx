@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
-import { Button, Box } from '@mui/material';
+import React from 'react';
+import { Box } from '@mui/material';
 import { aboutStyle } from './style';
-import { useCustomHook } from '@/hooks/useGetData';
+import { ActionButton } from '@/components/buttons/ActionButton';
 
-export const About = () => {
-  const [initValue, setInitValue] = useState('1');
-
-  const { value, someFunction } = useCustomHook(initValue);
-
-  const handleClick = () => {
-    setInitValue('2');
-
-    someFunction('3');
-  };
-
-  return (
-    <Box sx={aboutStyle}>
-      <Button onClick={handleClick} variant="outlined">
-        Click
-      </Button>
-    </Box>
-  );
-};
+export const About = () => (
+  <Box sx={aboutStyle}>
+    <ActionButton text="44444">Open</ActionButton>
+  </Box>
+);
