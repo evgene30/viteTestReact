@@ -5,6 +5,6 @@ import { ActionButton } from '@/components/buttons/ActionButton';
 
 export const About = () => (
   <Box sx={aboutStyle}>
-    <ActionButton text="44444">Open</ActionButton>
+    <ActionButton text="У меня получилось! -">Open</ActionButton>
   </Box>
 );
