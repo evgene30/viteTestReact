@@ -1,6 +1,6 @@
-import { CSSObject, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 
-export const layoutStyle = (theme: Theme): CSSObject => ({
+export const layoutStyle = (theme: Theme) => ({
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
