@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, useCallback } from 'react';
 import { useCustomHook } from '@/hooks/useCustomHook';
 import { Button } from './Button';
 
@@ -15,9 +15,9 @@ const composeHandler =
     const { text } = props;
     const hookResult = hookFunction(text);
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
       console.log(hookResult);
-    };
+    }, [hookResult]);
 
     return <WrappedComponent {...props} onClick={handleClick} />;
   };
