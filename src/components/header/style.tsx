@@ -1,4 +1,4 @@
-import { CSSObject, InputBase, Theme, alpha, styled } from '@mui/material';
+import { InputBase, Theme, alpha, styled } from '@mui/material';
 
 export const headerStyle = (theme: Theme) => ({
   height: 40,
