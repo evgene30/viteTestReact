@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { aboutStyle } from './style';
 import { ActionButton } from '@/components/buttons/ActionButton';
+import { NavTabs } from '@/components/tooltip/CustomTooltip';
 
 export const sortArr = [
   { id: 1, title: 'test1', label: 6 },
@@ -14,5 +15,6 @@ export const sortArr = [
 export const About = () => (
   <Box sx={aboutStyle}>
     <ActionButton data={sortArr}>Open</ActionButton>
+    <NavTabs />
   </Box>
 );
