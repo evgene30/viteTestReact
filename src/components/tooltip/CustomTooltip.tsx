@@ -4,8 +4,9 @@ import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Tooltip from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
-import { IconButton } from '@mui/material';
+import { Badge, CircularProgress, IconButton } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
+import html2canvas from 'html2canvas';
 
 interface LinkTabProps {
   label: string;
@@ -24,30 +25,116 @@ const isModifiedEvent = (event: MouseEvent<HTMLAnchorElement>) =>
 
 const TabsTooltip: React.FC<LinkTabProps & { children: React.ReactNode }> =
   memo(({ selected, label, href, children }) => {
+    const [screenshot, setScreenshot] = useState('');
+    const [loadedScreen, setLoadedScreen] = useState(false);
     if (selected) {
       console.log(href, label);
 
       return <>{children}</>;
     }
 
+    const handleTooltipOpen = async () => {
+      if (!screenshot) {
+        const canvas = await html2canvas(
+          document.querySelector('body') as HTMLElement, // указываем элемент, на котором нужно сделать скриншот
+        );
+        const imageScreen = canvas.toDataURL('image/png');
+        setScreenshot(imageScreen);
+      }
+    };
+
     const tooltipContent = (
       <Box
         sx={{
-          width: '100px',
-          height: '80px',
+          fontSize: '12px',
+          fontWeight: 'bolder',
+          margin: '3px',
+          width: '180px',
+          height: 'auto',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           flexDirection: 'column',
+          gap: '10px',
         }}
       >
-        <div>{label}</div>
-        <div>{href}</div>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '15px',
+            alignItems: 'center',
+          }}
+        >
+          <Badge
+            sx={{
+              '& .MuiBadge-badge': {
+                backgroundColor: '#44b700',
+                color: '#44b700',
+                // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+                '&::after': {
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  animation: 'ripple 1.2s infinite ease-in-out',
+                  border: '1px solid currentColor',
+                  content: '""',
+                },
+              },
+              '@keyframes ripple': {
+                '0%': {
+                  transform: 'scale(.8)',
+                  opacity: 1,
+                },
+                '100%': {
+                  transform: 'scale(2.4)',
+                  opacity: 0,
+                },
+              },
+            }}
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            variant="dot"
+          />
+
+          <Box>Status page: {label}</Box>
+        </Box>
+        <Box>Page url: {href}</Box>
+
+        {screenshot ? (
+          <Box>
+            <img
+              onLoad={() => setLoadedScreen(true)}
+              src={screenshot}
+              alt="Tab Screenshot"
+              style={{
+                margin: 0,
+                maxHeight: '120px',
+                opacity: loadedScreen ? 1 : 0,
+                transition: 'opacity 0.5s ease-in-out',
+              }}
+            />
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              height: '120px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: '10px',
+            }}
+          >
+            <CircularProgress color="inherit" thickness={6} size={25} />
+          </Box>
+        )}
       </Box>
     );
 
     return (
       <Tooltip
+        onOpen={handleTooltipOpen}
         placement="bottom"
         title={tooltipContent}
         arrow
@@ -74,7 +161,6 @@ const LinkTab: FC<LinkTabProps> = memo((props) => {
           component="a"
           onClick={(e) => {
             if (!isModifiedEvent(e)) {
-              console.log(props?.href);
               e.preventDefault();
             }
           }}
