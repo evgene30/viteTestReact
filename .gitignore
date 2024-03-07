@@ -26,4 +26,5 @@ dev-dist/
 *.njsproj
 *.sln
 *.sw
-dev-dist/
+dev-dist/*
+dev-dist/*.js
