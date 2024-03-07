@@ -17,9 +17,9 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-    },
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "vite.config.ts", "single-spa-entry.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

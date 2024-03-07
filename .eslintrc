@@ -133,6 +133,18 @@
   },
   "overrides": [
     {
+      "files": ["vite.config.ts"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": ["single-spa-entry.ts"],
+      "rules": {
+        "@typescript-eslint/no-unsafe-call": "off"
+      }
+    },
+    {
       "files": ["**/*.tsx"],
       "rules": {
         "react/prop-types": "off",

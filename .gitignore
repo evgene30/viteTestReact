@@ -25,4 +25,5 @@ dev-dist/
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw
+dev-dist/
