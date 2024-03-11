@@ -28,8 +28,6 @@ const TabsTooltip: React.FC<LinkTabProps & { children: React.ReactNode }> =
     const [screenshot, setScreenshot] = useState('');
     const [loadedScreen, setLoadedScreen] = useState(false);
     if (selected) {
-      console.log(href, label);
-
       return <>{children}</>;
     }
 
