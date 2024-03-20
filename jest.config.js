@@ -14,6 +14,7 @@ const config = {
   },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
     '^.+\\.svg$': 'jest-svg-transformer',
     '^.+\\.css$': 'identity-obj-proxy',
   },
