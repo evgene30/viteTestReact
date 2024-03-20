@@ -3,7 +3,7 @@
     "es6": true,
     "browser": true,
     "node": true,
-    "jest": true
+    "jest/global": true
   },
   "settings": {
     "import/resolver": {
@@ -17,6 +17,7 @@
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:react/recommended",
+    "plugin:jest/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -30,6 +31,7 @@
   "plugins": [
     "eslint-plugin-import-helpers",
     "react",
+    "jest",
     "react-hooks",
     "jsx-a11y",
     "@typescript-eslint",
