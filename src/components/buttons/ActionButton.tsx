@@ -1,4 +1,5 @@
 import React, { ComponentProps, useCallback } from 'react';
+
 import { useCustomHook } from '@/hooks/useCustomHook';
 import { Button } from './Button';
 
@@ -11,7 +12,7 @@ interface PropsHandler extends Partial<ComponentProps<typeof Button>> {
 
 const composeHandler =
   (
-    WrappedComponent: React.ElementType,
+    WrappedComponent: JSX.ElementType,
     hookFunction: (item: string | undefined, data: TDataArray) => TDataArray,
   ) =>
   (props: PropsHandler) => {
