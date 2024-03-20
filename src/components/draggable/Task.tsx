@@ -1,8 +1,15 @@
 import { useSortable } from '@dnd-kit/sortable';
 import React from 'react';
 import { CSS } from '@dnd-kit/utilities';
+import { Box } from '@mui/material';
 
-export const Task = ({ id, title }: { id: string; title: string }) => {
+export const Task = ({
+  id,
+  children,
+}: {
+  id: string;
+  children: React.ReactNode;
+}) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -12,15 +19,14 @@ export const Task = ({ id, title }: { id: string; title: string }) => {
   };
 
   return (
-    <div
+    <Box
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
       className="task"
     >
-      <input type="checkbox" className="checkbox" />
-      {title}
-    </div>
+      {children}
+    </Box>
   );
 };

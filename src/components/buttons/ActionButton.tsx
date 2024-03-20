@@ -1,9 +1,8 @@
 import React, { ComponentProps, useCallback } from 'react';
 import { useCustomHook } from '@/hooks/useCustomHook';
 import { Button } from './Button';
-import { sortArr } from '@/pages/about/About';
 
-export type TDataArray = typeof sortArr;
+export type TDataArray = unknown;
 
 interface PropsHandler extends Partial<ComponentProps<typeof Button>> {
   text?: string;
@@ -13,17 +12,11 @@ interface PropsHandler extends Partial<ComponentProps<typeof Button>> {
 const composeHandler =
   (
     WrappedComponent: React.ElementType,
-    hookFunction: (
-      item: string | undefined,
-      data: TDataArray | undefined,
-    ) => string | undefined | TDataArray,
+    hookFunction: (item: string | undefined, data: TDataArray) => TDataArray,
   ) =>
   (props: PropsHandler) => {
     const { text, data } = props;
-    const hookResult = hookFunction(
-      text as string,
-      data as unknown as TDataArray,
-    );
+    const hookResult = hookFunction(text as string, data);
     const handleClick = useCallback(() => {
       console.log(hookResult);
     }, [hookResult]);

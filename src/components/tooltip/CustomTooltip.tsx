@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, ReactElement, FC, memo } from 'react';
+import React, { useState, ReactElement, FC, memo } from 'react';
 import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,34 +7,39 @@ import Zoom from '@mui/material/Zoom';
 import { Badge, CircularProgress, IconButton } from '@mui/material';
 import { IoMdCloseCircle } from 'react-icons/io';
 import html2canvas from 'html2canvas';
+import {
+  DndContext,
+  closestCorners,
+  useSensor,
+  useSensors,
+  KeyboardSensor,
+  PointerSensor,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
+import { Task } from '../draggable/Task';
 
 interface LinkTabProps {
+  selected?: boolean;
+  children?: React.ReactNode;
   label: string;
   href: string;
-  selected: boolean;
-  onClose: () => void;
 }
 
-const isModifiedEvent = (event: MouseEvent<HTMLAnchorElement>) =>
-  event.defaultPrevented ||
-  event.button !== 0 ||
-  event.metaKey ||
-  event.ctrlKey ||
-  event.altKey ||
-  event.shiftKey;
-
-const TabsTooltip: React.FC<LinkTabProps & { children: React.ReactNode }> =
-  memo(({ selected, label, href, children }) => {
+const TabsTooltip: React.FC<LinkTabProps> = memo(
+  ({ label, href, children }) => {
     const [screenshot, setScreenshot] = useState('');
     const [loadedScreen, setLoadedScreen] = useState(false);
-    if (selected) {
-      return <>{children}</>;
-    }
 
     const handleTooltipOpen = async () => {
       if (!screenshot) {
         const canvas = await html2canvas(
-          document.querySelector('body') as HTMLElement, // указываем элемент, на котором нужно сделать скриншот
+          document.querySelector('body') as HTMLElement,
         );
         const imageScreen = canvas.toDataURL('image/png');
         setScreenshot(imageScreen);
@@ -67,7 +72,6 @@ const TabsTooltip: React.FC<LinkTabProps & { children: React.ReactNode }> =
               '& .MuiBadge-badge': {
                 backgroundColor: '#44b700',
                 color: '#44b700',
-                // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
                 '&::after': {
                   position: 'absolute',
                   top: 0,
@@ -137,110 +141,105 @@ const TabsTooltip: React.FC<LinkTabProps & { children: React.ReactNode }> =
         title={tooltipContent}
         arrow
         TransitionComponent={Zoom}
-        describeChild={!selected}
       >
         {children as ReactElement}
       </Tooltip>
     );
-  });
+  },
+);
 
 const LinkTab: FC<LinkTabProps> = memo((props) => {
-  const { onClose } = props;
+  const { href, label } = props;
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-      }}
-    >
-      <TabsTooltip {...props}>
-        <Tab
-          component="a"
-          onClick={(e) => {
-            if (!isModifiedEvent(e)) {
-              e.preventDefault();
-            }
-          }}
-          aria-current={props?.selected ? 'page' : undefined}
-          {...props}
-        />
-      </TabsTooltip>
-
+    <Task id={href}>
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flexDirection: 'row',
         }}
       >
-        <Tooltip title="Закрыть" arrow placement="top">
-          <IconButton
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose();
-            }}
-            size="small"
-            sx={{ ml: 0.5 }}
-          >
-            <IoMdCloseCircle fontSize="small" />
-          </IconButton>
-        </Tooltip>
+        <TabsTooltip {...props}>
+          <Tab
+            aria-current={props?.selected ? 'page' : undefined}
+            href={href}
+            label={label}
+          />
+        </TabsTooltip>
+
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Tooltip title="Закрыть" arrow placement="top">
+            <IconButton size="small" sx={{ ml: 0.5 }}>
+              <IoMdCloseCircle fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Box>
-    </Box>
+    </Task>
   );
 });
 
 export function NavTabs() {
-  const [value, setValue] = useState(0);
-
   const [tabs, setTabs] = useState([
-    { label: 'Page One', href: '/drafts' },
-    { label: 'Page Two', href: '/trash' },
-    { label: 'Page 3', href: '/trash3' },
-    { label: 'Page 4', href: '/trash4' },
-    { label: 'Page 5', href: '/trash5' },
+    { label: 'Page One', href: 'drafts' },
+    { label: 'Page Two', href: 'trash' },
+    { label: 'Page 3', href: 'trash3' },
+    { label: 'Page 4', href: 'trash4' },
+    { label: 'Page 5', href: 'trash5' },
   ]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    if (!isModifiedEvent(event as MouseEvent<HTMLAnchorElement>)) {
-      setValue(newValue);
-    }
-  };
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
 
-  const handleCloseTab = (tabIndex: number): void => {
-    const newTabs = tabs.filter((_, index) => index !== tabIndex);
-    setTabs(newTabs);
-    if (value >= tabIndex && value > 0) {
-      setValue((prevValue) => prevValue - 1);
-    }
+  const getTaskPos = (id: string) => tabs.findIndex((task) => task.href === id);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event as {
+      active: { id: string };
+      over: { id: string };
+    };
+
+    if (active.id === over.id) return;
+
+    const originalPos = getTaskPos(active.id);
+    const newPos = getTaskPos(over.id);
+
+    setTabs(arrayMove(tabs, originalPos, newPos));
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Tabs
-        variant="scrollable"
-        scrollButtons
-        value={value}
-        onChange={handleChange}
-        aria-label="nav tabs example"
-        role="navigation"
-        sx={{
-          [`& .${tabsClasses.scrollButtons}`]: {
-            '&.Mui-disabled': { opacity: 0.3 },
-          },
-        }}
-      >
-        {tabs.map((tab, index) => (
-          <LinkTab
-            key={tab.href}
-            label={tab.label}
-            href={tab.href}
-            selected={value === index}
-            onClose={() => handleCloseTab(index)}
-          />
-        ))}
-      </Tabs>
-    </Box>
+    <DndContext
+      collisionDetection={closestCorners}
+      sensors={sensors}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext items={tabs} strategy={horizontalListSortingStrategy}>
+        <Tabs
+          variant="scrollable"
+          scrollButtons
+          value={tabs.findIndex((task) => task.href === 'trash')}
+          aria-label="nav tabs example"
+          sx={{
+            [`& .${tabsClasses.scrollButtons}`]: {
+              '&.Mui-disabled': { opacity: 0.3 },
+            },
+          }}
+        >
+          {tabs.map((tab) => (
+            <LinkTab href={tab.href} key={tab.href} label={tab.label} />
+          ))}
+        </Tabs>
+      </SortableContext>
+    </DndContext>
   );
 }
