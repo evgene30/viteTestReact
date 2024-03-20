@@ -1,7 +1,6 @@
-import { TDataArray } from '@/components/buttons/ActionButton';
 import { config as conf } from '@/hooks/useCustomHook';
 
-export const sort = (arr: TDataArray, config: typeof conf) =>
+export const sort = (arr: Array<string>, config: typeof conf) =>
   arr.sort((a, b) => {
     for (let i = 0; i < config.length; i += 1) {
       const { value, direction } = config[i];

@@ -11,14 +11,14 @@ export const config = [
 export const useCustomHook = (
   text?: string,
   data?: TDataArray,
-): string | undefined | TDataArray => {
+): Array<string> | undefined | string => {
   const [state] = useState(text?.length || data);
   if (typeof state === 'string') {
-    return `${text} ${state as string}`;
+    return `${text} ${state as unknown as string}`;
   }
 
-  if (typeof state === 'object') {
-    return sort(state, config);
+  if (Array.isArray(state)) {
+    return sort(state as Array<string>, config);
   }
 
   return undefined;

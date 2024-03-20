@@ -223,7 +223,10 @@ export function NavTabs() {
       sensors={sensors}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={tabs} strategy={horizontalListSortingStrategy}>
+      <SortableContext
+        items={tabs as never}
+        strategy={horizontalListSortingStrategy}
+      >
         <Tabs
           variant="scrollable"
           scrollButtons
