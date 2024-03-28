@@ -6,6 +6,7 @@ export const Button = ({
   children,
 }: {
   onClick: () => void;
+
   children: ReactNode;
 }) => (
   <ButtonMUI variant="outlined" onClick={onClick}>
