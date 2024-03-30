@@ -20,6 +20,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "single-spa-entry.ts"],
+  "include": ["src", "vite.config.ts", "single-spa-entry.ts", "babel.config.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
