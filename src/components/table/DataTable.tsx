@@ -59,7 +59,7 @@ export function DataTable() {
     pageSize: 3,
     page,
   });
-  const [rowCountState, setRowCountState] = useState(5);
+  const [rowCountState, setRowCountState] = useState(10);
 
   const [sortModels, setSortModel] = useState<GridSortModel>([
     {
@@ -100,9 +100,9 @@ export function DataTable() {
         onPaginationModelChange={setPaginationModel}
         sortModel={sortModels}
         onSortModelChange={handleSortModelChange}
-        pageSizeOptions={[5, 10, 15]}
-        paginationMode="server"
-        sortingMode="server"
+        pageSizeOptions={[10, 15]}
+        // paginationMode="server"
+        // sortingMode="server"
         disableRowSelectionOnClick
       />
     </Box>

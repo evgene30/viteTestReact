@@ -5,7 +5,7 @@ import { DataTable } from '@/components/table/DataTable';
 import { DialogSelect } from '@/components/dialog/Dialog';
 
 export const Home = () => (
-  <Box sx={paginationStyles as never}>
+  <Box sx={paginationStyles}>
     <DialogSelect />
     <DataTable />
   </Box>

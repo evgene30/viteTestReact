@@ -1,7 +1,8 @@
 import { InputBase, Theme, alpha, styled } from '@mui/material';
+import { padding } from '@mui/system';
 
 export const headerStyle = (theme: Theme) => ({
-  height: 40,
+  padding: theme.spacing(0.5),
   boxShadow: 'none',
   display: 'flex',
   justifyContent: 'center',

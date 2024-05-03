@@ -1,7 +1,8 @@
 import { Theme } from '@mui/material';
+import { fontSize, height, padding } from '@mui/system';
 
 export const layoutStyle = (theme: Theme) => ({
-  minHeight: '100%',
+  height: '100vh',
   display: 'flex',
   flexDirection: 'column',
   '.content': {
@@ -10,7 +11,13 @@ export const layoutStyle = (theme: Theme) => ({
   },
   '.footer': {
     flexShrink: 0,
-    backgroundColor: theme.palette.grey[400],
+    display: 'flex',
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
+    justifyContent: 'start',
+    alignItems: 'center',
+    gap: theme.spacing(3),
+    padding: theme.spacing(1.5),
+    fontSize: '14px',
   },
 });
