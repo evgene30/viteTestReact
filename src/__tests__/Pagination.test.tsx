@@ -7,7 +7,7 @@ describe('PaginationComponent', () => {
     const setPage = jest.fn();
 
     const { getByTestId } = render(
-      <PaginationComponent page={1} setPage={setPage} />,
+      <PaginationComponent page={1} setPage={setPage} count={5} />,
     );
 
     const paginationComponent = getByTestId('pagination-component');
@@ -17,7 +17,7 @@ describe('PaginationComponent', () => {
   it('calls setPage function when page is changed', () => {
     const setPage = jest.fn();
     const { getByText } = render(
-      <PaginationComponent page={1} setPage={setPage} />,
+      <PaginationComponent page={1} setPage={setPage} count={5} />,
     );
 
     const page2Button = getByText('2');

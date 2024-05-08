@@ -3,6 +3,7 @@ import { Stack, Pagination } from '@mui/material';
 import { paginationStyles } from './styles';
 
 type TPaginationComponent = {
+  count: number;
   page: number;
   setPage: (item: number) => void;
 };
@@ -10,16 +11,17 @@ type TPaginationComponent = {
 export const PaginationComponent: FC<TPaginationComponent> = ({
   page,
   setPage,
+  count,
 }) => {
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
   return (
-    <Stack spacing={2} sx={paginationStyles as never}>
+    <Stack spacing={2} sx={paginationStyles}>
       <Pagination
         data-testid="pagination-component"
-        count={7}
+        count={count}
         variant="outlined"
         shape="rounded"
         page={page}

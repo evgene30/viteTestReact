@@ -1,7 +1,7 @@
 import React from 'react';
 import { About } from '@/pages/about/About';
 import { Home } from '@/pages/home/Home';
-import { getLoadUsers } from '@/routes/loaders/loaders';
+import { getLoadUsers } from '@/routes/loaders/getLoadUsers';
 
 export const menuLinks = [
   {
@@ -25,7 +25,7 @@ export const menuLinks = [
     children: [
       {
         path: '/work/:contactId',
-        element: <div>Contakt</div>,
+        element: <div>Contact</div>,
       },
     ],
   },

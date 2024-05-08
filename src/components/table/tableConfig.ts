@@ -1,31 +1,33 @@
 import { GridColDef } from '@mui/x-data-grid';
 
 export const columnsConfig: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 80, sortable: true, align: 'left' },
   {
     field: 'name',
     headerName: 'User name',
-    editable: true,
-    width: 290,
+    flex: 1,
+    align: 'left',
+    sortable: true,
   },
   {
     field: 'email',
     headerName: 'Email',
-    editable: true,
-    width: 190,
+    flex: 1,
+    align: 'left',
+    sortable: true,
   },
   {
     field: 'phone',
     headerName: 'User phone',
-    type: 'number',
-    editable: true,
-    width: 290,
+    flex: 1,
+    align: 'left',
+    sortable: true,
   },
   {
     field: 'website',
     headerName: 'User website',
-    description: 'This column has a value getter and is not sortable.',
     sortable: true,
-    width: 190,
+    flex: 1,
+    align: 'left',
   },
 ];

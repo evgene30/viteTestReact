@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useLoaderData } from 'react-router-dom';
 import { noResultStyles } from '@/components/table/styles';
 import { PaginationComponent } from '@/components/pagination/Pagination';
-import { LoadUsersType } from '@/routes/loaders/loaders';
+import { LoadUsersType } from '@/routes/loaders/getLoadUsers';
 import { columnsConfig } from './tableConfig';
 
 export const DataTable = memo((): JSX.Element => {
@@ -20,7 +20,11 @@ export const DataTable = memo((): JSX.Element => {
       <DataGrid
         slots={{
           pagination: () => (
-            <PaginationComponent page={page} setPage={setPage} />
+            <PaginationComponent
+              page={page}
+              setPage={setPage}
+              count={Number(users.length / paginationModel.pageSize) || 1}
+            />
           ),
           loadingOverlay: LinearProgress,
           noRowsOverlay: () => <Box sx={noResultStyles}>No result</Box>,
