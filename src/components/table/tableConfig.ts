@@ -12,14 +12,14 @@ export const columnsConfig: GridColDef[] = [
     field: 'email',
     headerName: 'Email',
     editable: true,
-    width: 90,
+    width: 190,
   },
   {
     field: 'phone',
     headerName: 'User phone',
     type: 'number',
     editable: true,
-    width: 390,
+    width: 290,
   },
   {
     field: 'website',
