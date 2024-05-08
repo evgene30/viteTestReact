@@ -12,43 +12,41 @@ import {
   headerStyle,
 } from './style';
 
-export const Header = () => {
-  const titleApp = 'Testing App';
+export const titleApp = 'Testing App';
 
-  return (
-    <AppBar position="static" sx={headerStyle}>
-      <Toolbar>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1 }}
-          className="headerTitle"
+export const Header = () => (
+  <AppBar position="static" sx={headerStyle}>
+    <Toolbar>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{ flexGrow: 1 }}
+        className="headerTitle"
+      >
+        <Link to="/">{titleApp}</Link>
+      </Typography>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Search>
+      {menuLinks.map((text) => (
+        <NavLink
+          key={text.title}
+          to={text.link}
+          className={({ isActive }) =>
+            isActive ? 'active' : 'nav-link-header'
+          }
         >
-          <Link to="/">{titleApp}</Link>
-        </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-        {menuLinks.map((text) => (
-          <NavLink
-            key={text.title}
-            to={text.link}
-            className={({ isActive }) =>
-              isActive ? 'active' : 'nav-link-header'
-            }
-          >
-            <Button sx={buttonHeader} color="inherit">
-              {text.title}
-            </Button>
-          </NavLink>
-        ))}
-      </Toolbar>
-    </AppBar>
-  );
-};
+          <Button sx={buttonHeader} color="inherit">
+            {text.title}
+          </Button>
+        </NavLink>
+      ))}
+    </Toolbar>
+  </AppBar>
+);
