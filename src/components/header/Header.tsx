@@ -1,6 +1,6 @@
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { menuLinks } from '@/service/menuLinks';
@@ -13,13 +13,18 @@ import {
 } from './style';
 
 export const Header = () => {
-  const titleApp = 'Testing';
+  const titleApp = 'Testing App';
 
   return (
     <AppBar position="static" sx={headerStyle}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {titleApp}
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+          className="headerTitle"
+        >
+          <Link to="/">{titleApp}</Link>
         </Typography>
         <Search>
           <SearchIconWrapper>

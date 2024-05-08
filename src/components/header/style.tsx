@@ -6,6 +6,12 @@ export const headerStyle = (theme: Theme) => ({
   boxShadow: 'none',
   display: 'flex',
   justifyContent: 'center',
+  '.headerTitle': {
+    a: {
+      color: 'white',
+      textDecoration: 'none',
+    },
+  },
   '.MuiToolbar-root': {
     gap: '20px',
     minHeight: 'auto',
