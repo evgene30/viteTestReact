@@ -1,4 +1,6 @@
-import React, { useState, ReactElement, FC, memo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable consistent-return */
+import React, { useState, ReactElement, FC, memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -36,15 +38,19 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
     const [screenshot, setScreenshot] = useState('');
     const [loadedScreen, setLoadedScreen] = useState(false);
 
-    const handleTooltipOpen = async () => {
-      if (!screenshot) {
+    useEffect(() => {
+      if (screenshot) return;
+      const captureScreen = async () => {
         const canvas = await html2canvas(
           document.querySelector('body') as HTMLElement,
         );
         const imageScreen = canvas.toDataURL('image/png');
         setScreenshot(imageScreen);
-      }
-    };
+      };
+      const timer = setTimeout(captureScreen, 1000);
+
+      return () => clearTimeout(timer);
+    }, []);
 
     const tooltipContent = (
       <Box
@@ -136,7 +142,6 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
 
     return (
       <Tooltip
-        onOpen={handleTooltipOpen}
         placement="bottom"
         title={tooltipContent}
         arrow
