@@ -34,7 +34,7 @@ interface LinkTabProps {
 }
 
 const TabsTooltip: React.FC<LinkTabProps> = memo(
-  ({ label, href, children }) => {
+  ({ label, href, children, selected }) => {
     const [screenshot, setScreenshot] = useState('');
     const [loadedScreen, setLoadedScreen] = useState(false);
 
@@ -44,8 +44,7 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
         const canvas = await html2canvas(
           document.querySelector('body') as HTMLElement,
         );
-        const imageScreen = canvas.toDataURL('image/png');
-        setScreenshot(imageScreen);
+        setScreenshot(canvas.toDataURL('image/png'));
       };
       const timer = setTimeout(captureScreen, 1000);
 
@@ -58,7 +57,7 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
           fontSize: '12px',
           fontWeight: 'bolder',
           margin: '3px',
-          width: '180px',
+          width: '175px',
           height: 'auto',
           display: 'flex',
           flexDirection: 'column',
@@ -121,6 +120,7 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
                 maxHeight: '120px',
                 opacity: loadedScreen ? 1 : 0,
                 transition: 'opacity 0.5s ease-in-out',
+                borderRadius: '4px',
               }}
             />
           </Box>
@@ -139,6 +139,8 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
         )}
       </Box>
     );
+
+    if (selected) return children;
 
     return (
       <Tooltip
