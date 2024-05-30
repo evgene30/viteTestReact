@@ -2,6 +2,7 @@ import React from 'react';
 import { About } from '@/pages/about/About';
 import { Home } from '@/pages/home/Home';
 import { getLoadUsers } from '@/routes/loaders/getLoadUsers';
+import { Work } from '@/pages/work/Work';
 
 export const menuLinks = [
   {
@@ -21,7 +22,7 @@ export const menuLinks = [
     link: '/work',
     title: 'Work',
     path: '/work',
-    element: <div>W1</div>,
+    element: <Work />,
     children: [
       {
         path: '/work/:contactId',
