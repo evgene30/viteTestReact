@@ -1,9 +1,22 @@
-import { Box, Button, Snackbar } from '@mui/material';
-import React, { useLayoutEffect, useState } from 'react';
+import { Box, Button } from '@mui/material';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { workStyle } from './style';
+import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
 
 export const Work = () => {
   const [buttonStatus, setButtonStatus] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    // нажатие вне кнопки
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   useLayoutEffect(() => {
     const savedStatus = localStorage.getItem('buttonStatus');
@@ -16,33 +29,36 @@ export const Work = () => {
     const newStatus = !buttonStatus;
     setButtonStatus(newStatus);
     localStorage.setItem('buttonStatus', JSON.stringify(newStatus));
+    setOpen(false);
   };
 
-  const handleCheckStatusAndRerender = (): JSX.Element => {
+  const handleCheckStatusAndRerender = (): void => {
     const savedStatus = JSON.parse(localStorage.getItem('buttonStatus') || '');
-    if (savedStatus === true) {
-      window.location.reload();
-
-      return <Box />;
+    if (savedStatus) {
+      console.log('first');
     }
-
-    return (
-      <Snackbar autoHideDuration={3000} message="Статус кнопки не равен true" />
-    );
+    setOpen(true);
   };
 
   return (
-    <Box sx={workStyle}>
-      <Button
-        variant="contained"
-        color={buttonStatus ? 'success' : 'warning'}
-        onClick={handleButtonClick}
-      >
-        {buttonStatus ? 'Статус: true' : 'Статус: false'}
-      </Button>
-      <Button variant="contained" onClick={handleCheckStatusAndRerender}>
-        Проверить статус и перерендерить
-      </Button>
-    </Box>
+    <>
+      <Box sx={workStyle}>
+        <Button
+          variant="contained"
+          color={buttonStatus ? 'success' : 'warning'}
+          onClick={handleButtonClick}
+        >
+          {buttonStatus ? 'Статус: true' : 'Статус: false'}
+        </Button>
+        <Button variant="contained" onClick={handleCheckStatusAndRerender}>
+          Check status and rerender
+        </Button>
+      </Box>
+      <CustomSnackbar
+        openBar={open}
+        handleClose={handleClose}
+        loadStatus={buttonStatus}
+      />
+    </>
   );
 };
