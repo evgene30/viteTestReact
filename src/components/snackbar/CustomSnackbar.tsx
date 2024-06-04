@@ -30,13 +30,15 @@ export const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      message={loadStatus ? 'Status loading ... true' : 'Loading ... false'}
+      message={loadStatus ? 'Success!' : 'Loading ... false'}
       open={openBar}
       onClose={handleClose}
-      autoHideDuration={loadStatus ? 3000 : null}
+      autoHideDuration={3000}
       action={action}
       ContentProps={{
         style: {
+          fontSize: '15px',
+          fontWeight: 500,
           width: '350px',
           boxShadow: '4px 4px 15px 10px rgba(0,0,0,0.1)',
           backgroundColor: palette[loadStatus ? 'success' : 'error'].main,

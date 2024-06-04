@@ -51,7 +51,7 @@ export const Work = () => {
           {buttonStatus ? 'Статус: true' : 'Статус: false'}
         </Button>
         <Button variant="contained" onClick={handleCheckStatusAndRerender}>
-          Check status and rerender
+          Check status
         </Button>
       </Box>
       <CustomSnackbar
