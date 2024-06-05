@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { workStyle } from './style';
 import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
 
@@ -20,7 +20,7 @@ export const Work = () => {
 
   useLayoutEffect(() => {
     const savedStatus = localStorage.getItem('buttonStatus');
-    if (savedStatus !== null && typeof savedStatus === 'string') {
+    if (savedStatus) {
       setButtonStatus(JSON.parse(savedStatus) as boolean);
     }
   }, []);
