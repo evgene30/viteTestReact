@@ -35,42 +35,7 @@ export const Work = () => {
   const handleCheckStatusAndRerender = (): void => {
     const savedStatus = JSON.parse(localStorage.getItem('buttonStatus') || '');
     if (savedStatus) {
-      const one = [
-        { id: 12 },
-        { id: 13, children: [{ id: 14, rule: false }] },
-        {
-          id: 15,
-          rule: false,
-          children: [
-            {
-              id: 16,
-              rule: false,
-              children: [
-                { id: 19, rule: false, children: [{ id: 1988, rule: true }] },
-              ],
-            },
-          ],
-        },
-        { id: 199, rule: false, children: [{ id: 998, rule: true }] },
-      ];
-      // алгоритм обхода по уровням breadth-first search
-      const findFirstWithRuleTrueByLevels = (array: any) => {
-        const queue = [...array]; // Инициализируем очередь с первым уровнем элементов
-        while (queue.length > 0) {
-          const item = queue.shift(); // Извлекаем первый элемент из очереди
-          if (item.rule === true) {
-            return item.id as string; // Возвращаем id, если найден элемент с rule: true
-          }
-          if (item.children) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            queue.push(...item.children); // Добавляем дочерние элементы в очередь
-          }
-        }
-
-        return undefined; // Если ничего не найдено
-      };
-
-      console.log(findFirstWithRuleTrueByLevels(one));
+      console.log(savedStatus);
     }
     setOpen(true);
   };
