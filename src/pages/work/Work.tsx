@@ -40,6 +40,10 @@ export const Work = () => {
     setOpen(true);
   };
 
+  // eslint-disable-next-line no-underscore-dangle
+  const config = (window as any).__RUNTIME_CONFIG__;
+  console.log(config);
+
   return (
     <>
       <Box sx={workStyle}>
