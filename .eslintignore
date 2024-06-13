@@ -1,0 +1,8 @@
+# Игнорирование файлов
+node_modules/
+dist/
+config.js
+
+# Игнорирование папок
+build/
+coverage/
