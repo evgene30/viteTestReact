@@ -1,7 +1,18 @@
 import { Box, Button } from '@mui/material';
 import React, { useLayoutEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { workStyle } from './style';
 import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
+
+interface Window {
+  __RUNTIME_CONFIG__: {
+    API_URL: string;
+    ANOTHER_CONFIG: string;
+  };
+}
+
+// eslint-disable-next-line no-underscore-dangle
+const config = (window as unknown as Window).__RUNTIME_CONFIG__;
 
 export const Work = () => {
   const [buttonStatus, setButtonStatus] = useState(false);
@@ -35,25 +46,34 @@ export const Work = () => {
   const handleCheckStatusAndRerender = (): void => {
     const savedStatus = JSON.parse(localStorage.getItem('buttonStatus') || '');
     if (savedStatus) {
-      console.log(savedStatus);
+      console.log(config);
     }
     setOpen(true);
   };
 
-  // eslint-disable-next-line no-underscore-dangle
-  const config = (window as any).__RUNTIME_CONFIG__;
-  console.log(config);
-
   return (
     <>
       <Box sx={workStyle}>
-        <Button
-          variant="contained"
-          color={buttonStatus ? 'success' : 'warning'}
-          onClick={handleButtonClick}
-        >
-          {buttonStatus ? 'Статус: true' : 'Статус: false'}
-        </Button>
+        {buttonStatus ? (
+          <Link target="_blank" to={config.API_URL} reloadDocument>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleButtonClick}
+            >
+              Статус: true
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={handleButtonClick}
+          >
+            Статус: false
+          </Button>
+        )}
+
         <Button variant="contained" onClick={handleCheckStatusAndRerender}>
           Check status
         </Button>
