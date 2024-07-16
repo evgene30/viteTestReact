@@ -48,97 +48,21 @@ export const Work = () => {
     if (savedStatus) {
       console.log(config);
     }
+
     setOpen(true);
   };
-
-  function convertSchemaToComponents(schema: any): any {
-    const elements = [];
-
-    if (schema.type === 'object' && schema.properties) {
-      Object.keys(schema.properties).forEach((key) => {
-        const property = schema.properties[key];
-        switch (property.type) {
-          case 'string':
-            elements.push(
-              <div key={key} label={property.title} name={key} />,
-            );
-            break;
-          // Добавьте здесь case для других типов...
-          default:
-            console.warn(`Unsupported type: ${property.type}`);
-        }
-      });
-    }
-
-    return elements as any;
-  }
-
-  const schema = {
-    type: 'object',
-    properties: {
-      firstName: {
-        type: 'string',
-        title: 'First Name',
-      },
-      lastName: {
-        type: 'string',
-        title: 'Last Name',
-      },
-      items: {
-        lastName: {
-          type: 'string',
-          title: 'Last Name',
-        },
-      },
-    },
-  };
-
-  console.log(convertSchemaToComponents(schema));
-
-//   <SchemaField>
-//   <SchemaField.String
-//     name="firstName"
-//     title="First Name"
-//     x-component="Input"
-//     x-decorator="FormItem"
-//   />
-//   <SchemaField.String
-//     name="lastName"
-//     title="Last Name"
-//     x-component="Input"
-//     x-decorator="FormItem"
-//   />
-//   <SchemaField.Array
-//     name="items"
-//     title="Items"
-//     x-component="ArrayContainer"
-//     x-decorator="FormItem">
-//     {({ items }) => items.map((item, index) => (
-//       <SchemaField.Object key={index} name={`${item}.lastName`}>
-//         <SchemaField.String
-//           name="lastName"
-//           title="Last Name"
-//           x-component="Input"
-//           x-decorator="FormItem"
-//         />
-//       </SchemaField.Object>
-//     ))}
-//   </SchemaField.Array>
-// </SchemaField>
 
   return (
     <>
       <Box sx={workStyle}>
         {buttonStatus ? (
-          <Link target="_blank" to={config.API_URL} reloadDocument>
-            <Button
-              variant="contained"
-              color="success"
-              onClick={handleButtonClick}
-            >
-              Статус: true
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleButtonClick}
+          >
+            Статус: true
+          </Button>
         ) : (
           <Button
             variant="contained"
