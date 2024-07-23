@@ -48,6 +48,7 @@ export const Work = () => {
     if (savedStatus) {
       console.log(config);
     }
+
     setOpen(true);
   };
 
@@ -55,15 +56,13 @@ export const Work = () => {
     <>
       <Box sx={workStyle}>
         {buttonStatus ? (
-          <Link target="_blank" to={config.API_URL} reloadDocument>
-            <Button
-              variant="contained"
-              color="success"
-              onClick={handleButtonClick}
-            >
-              Статус: true
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleButtonClick}
+          >
+            Статус: true
+          </Button>
         ) : (
           <Button
             variant="contained"
