@@ -5,9 +5,10 @@ import { useModal } from '../modal/ModalContext';
 
 export const DialogSelect = () => {
   const { openModal, closeModal } = useModal();
+  const component = <SelectLabels closeModal={closeModal} />;
 
   const handleOpenModal = () => {
-    openModal(<SelectLabels closeModal={closeModal} />);
+    openModal({ component, title: 'Open modal title' });
   };
 
   return (

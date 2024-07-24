@@ -15,3 +15,5 @@ export const getSettings = ({ keyPrimary, addKey }: TUnicKey): Selector =>
 
     return testState.defaultSettings.pagination.init;
   });
+
+export const getSearchText = (state: RootState) => state.search.searchText;

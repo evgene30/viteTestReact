@@ -1,16 +1,10 @@
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import SearchIcon from '@mui/icons-material/Search';
 
 import { menuLinks } from '@/service/menuLinks';
-import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-  buttonHeader,
-  headerStyle,
-} from './style';
+import { buttonHeader, headerStyle } from './style';
+import { SearchComponent } from '../search/Search';
 
 export const titleApp = 'Testing App';
 
@@ -25,15 +19,7 @@ export const Header = () => (
       >
         <Link to="/">{titleApp}</Link>
       </Typography>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ 'aria-label': 'search' }}
-        />
-      </Search>
+      <SearchComponent />
       {menuLinks.map((text) => (
         <NavLink
           key={text.title}

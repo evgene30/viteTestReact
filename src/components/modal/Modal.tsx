@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import {
   Button,
   Dialog,
@@ -13,10 +13,31 @@ import { useModal } from './ModalContext';
 export const Modal: FC = () => {
   const { isOpen, closeModal, modalContent } = useModal();
 
+  const actionsButton = useCallback(() => {
+    if (modalContent?.actions) {
+      return modalContent.actions;
+    }
+
+    if (modalContent?.actions === null) {
+      return null;
+    }
+
+    return (
+      <>
+        <Button variant="contained" color="error" onClick={closeModal}>
+          Cancel
+        </Button>
+        <Button variant="contained" color="success" onClick={() => null}>
+          Ok
+        </Button>
+      </>
+    );
+  }, [closeModal, modalContent?.actions]);
+
   return (
     <Dialog open={isOpen} onClose={closeModal}>
-      <DialogTitle sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-        Tested form
+      <DialogTitle sx={{ fontSize: '15px', fontWeight: 'bold' }}>
+        {modalContent?.title || ''}
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -30,14 +51,9 @@ export const Modal: FC = () => {
       >
         <CloseIcon />
       </IconButton>
-      <DialogContent>{modalContent}</DialogContent>
-      <DialogActions sx={{ gap: '10px' }}>
-        <Button variant="contained" color="error" onClick={closeModal}>
-          Cancel
-        </Button>
-        <Button variant="contained" color="success" onClick={() => null}>
-          Ok
-        </Button>
+      <DialogContent>{modalContent?.component}</DialogContent>
+      <DialogActions sx={{ gap: '10px', padding: '0 15px 15px 15px' }}>
+        {actionsButton()}
       </DialogActions>
     </Dialog>
   );

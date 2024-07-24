@@ -22,9 +22,28 @@ export type Option = {
   label: string;
 };
 
+type Search = {
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: any;
+  };
+  company: { name: string; catchPhrase: string; bs: string };
+  email: string;
+  id: number;
+  name: string;
+  phone: string;
+  username: string;
+  website: string;
+};
+
 type SelectLabelsProps = {
   setData?: () => void;
   closeModal?: () => void;
+  data?: Search[];
+  setDeleteSearchTextAction?: () => void;
 };
 
 const potions: Option[] = [
@@ -34,7 +53,11 @@ const potions: Option[] = [
 ];
 
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
-export const SelectLabels = ({ closeModal }: SelectLabelsProps) => {
+export const SelectLabels = ({
+  closeModal,
+  data,
+  setDeleteSearchTextAction,
+}: SelectLabelsProps) => {
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -69,19 +92,19 @@ export const SelectLabels = ({ closeModal }: SelectLabelsProps) => {
                     value={
                       value
                         ? options.find(
-                            (option: Option) => String(value) === option.id,
+                            (option: Option | Search) =>
+                              String(value) === option.id,
                           ) ?? null
                         : null
                     }
-                    getOptionLabel={(option) => option.label}
-                    filterOptions={(opts, state) =>
-                      opts.filter((opt) => opt.label.includes(state.inputValue))
+                    getOptionLabel={(option: Option | Search) =>
+                      option?.label || option?.name
                     }
                     onChange={(e, newValue) => {
                       onChange(newValue ? newValue.id : null);
                     }}
                     id="controllable-states-demo"
-                    options={potions}
+                    options={data || potions}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -116,7 +139,12 @@ export const SelectLabels = ({ closeModal }: SelectLabelsProps) => {
           </Box>
           <Button
             disabled={!isValid}
-            onClick={closeModal}
+            onClick={() => {
+              if (setDeleteSearchTextAction && closeModal) {
+                setDeleteSearchTextAction();
+                closeModal();
+              }
+            }}
             variant="outlined"
             color={checked ? 'error' : 'success'}
           >
