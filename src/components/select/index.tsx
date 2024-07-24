@@ -23,7 +23,8 @@ export type Option = {
 };
 
 type SelectLabelsProps = {
-  setData: (value: { Option: string; switch: boolean }) => void;
+  setData?: () => void;
+  closeModal?: () => void;
 };
 
 const potions: Option[] = [
@@ -33,7 +34,7 @@ const potions: Option[] = [
 ];
 
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
-export const SelectLabels = ({ setData }: SelectLabelsProps) => {
+export const SelectLabels = ({ closeModal }: SelectLabelsProps) => {
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -115,10 +116,7 @@ export const SelectLabels = ({ setData }: SelectLabelsProps) => {
           </Box>
           <Button
             disabled={!isValid}
-            onClick={() => {
-              setChecked(!checked);
-              resetField('selectedOption', { defaultValue: [] });
-            }}
+            onClick={closeModal}
             variant="outlined"
             color={checked ? 'error' : 'success'}
           >

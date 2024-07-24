@@ -6,12 +6,17 @@ import { Provider } from 'react-redux';
 import theme from './theme';
 import { router } from './routes/router';
 import { store } from './components/store/store';
+import { ModalProvider } from './components/modal/ModalContext';
+import { Modal } from './components/modal/Modal';
 
 const App: FC = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RouterProvider router={router} fallbackElement={null} />
+      <ModalProvider>
+        <CssBaseline />
+        <RouterProvider router={router} fallbackElement={null} />
+        <Modal />
+      </ModalProvider>
     </ThemeProvider>
   </Provider>
 );
