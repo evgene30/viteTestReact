@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable consistent-return */
-import React, { useState, ReactElement, FC, memo, useEffect } from 'react';
+import { useState, ReactElement, FC, memo, useEffect, ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -28,12 +26,12 @@ import { Task } from '../draggable/Task';
 
 interface LinkTabProps {
   selected?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
   label: string;
   href: string;
 }
 
-const TabsTooltip: React.FC<LinkTabProps> = memo(
+const TabsTooltip: FC<LinkTabProps> = memo(
   ({ label, href, children, selected }) => {
     const [screenshot, setScreenshot] = useState('');
     const [loadedScreen, setLoadedScreen] = useState(false);
@@ -48,8 +46,9 @@ const TabsTooltip: React.FC<LinkTabProps> = memo(
       };
       const timer = setTimeout(captureScreen, 1000);
 
+      // eslint-disable-next-line consistent-return
       return () => clearTimeout(timer);
-    }, []);
+    }, [screenshot]);
 
     const tooltipContent = (
       <Box

@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React, { useLayoutEffect, useState } from 'react';
+import { SyntheticEvent, useLayoutEffect, useState } from 'react';
 
 import { workStyle } from './style';
 import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
@@ -8,10 +8,7 @@ export const Work = () => {
   const [buttonStatus, setButtonStatus] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
+  const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
     // нажатие вне кнопки
     if (reason === 'clickaway') {
       return;

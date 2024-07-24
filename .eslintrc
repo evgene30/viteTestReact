@@ -50,6 +50,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "no-undef": "off",
     "no-void": "off",
     "@typescript-eslint/no-misused-promises": "off",

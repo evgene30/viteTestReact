@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { paginationStyles } from '@/pages/home/style';
 import { DataTable } from '@/components/table/DataTable';

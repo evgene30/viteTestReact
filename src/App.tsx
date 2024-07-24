@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { RouterProvider } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { Provider } from 'react-redux';
+import { FC } from 'react';
 import theme from './theme';
 import { router } from './routes/router';
 import { store } from './components/store/store';

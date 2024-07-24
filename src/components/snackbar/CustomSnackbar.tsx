@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
-import React from 'react';
 import { Snackbar, IconButton, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
