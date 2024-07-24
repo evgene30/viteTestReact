@@ -1,18 +1,8 @@
 import { Box, Button } from '@mui/material';
 import React, { useLayoutEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { workStyle } from './style';
 import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
-
-interface Window {
-  __RUNTIME_CONFIG__: {
-    API_URL: string;
-    ANOTHER_CONFIG: string;
-  };
-}
-
-// eslint-disable-next-line no-underscore-dangle
-const config = (window as unknown as Window).__RUNTIME_CONFIG__;
 
 export const Work = () => {
   const [buttonStatus, setButtonStatus] = useState(false);
@@ -46,7 +36,7 @@ export const Work = () => {
   const handleCheckStatusAndRerender = (): void => {
     const savedStatus = JSON.parse(localStorage.getItem('buttonStatus') || '');
     if (savedStatus) {
-      console.log(config);
+      console.log(savedStatus);
     }
 
     setOpen(true);
