@@ -28,7 +28,7 @@ type Search = {
     suite: string;
     city: string;
     zipcode: string;
-    geo: any;
+    geo: unknown;
   };
   company: { name: string; catchPhrase: string; bs: string };
   email: string;
@@ -53,6 +53,7 @@ const potions: Option[] = [
 ];
 
 type TOptionState = { selectedOption: Array<Option>; switch: boolean };
+
 export const SelectLabels = ({
   closeModal,
   data,
@@ -72,6 +73,15 @@ export const SelectLabels = ({
       switch: true,
     },
   });
+  const filteredOptions = data
+    ? data.map((option: Search | Option) => {
+        if (option instanceof Option) {
+          return option;
+        }
+
+        return null;
+      })
+    : potions;
 
   return (
     <form>
@@ -97,14 +107,18 @@ export const SelectLabels = ({
                           ) ?? null
                         : null
                     }
-                    getOptionLabel={(option: Option | Search) =>
-                      option?.label || option?.name
-                    }
+                    getOptionLabel={(option: Option | null) => {
+                      if (option) {
+                        return option.label;
+                      }
+
+                      return '';
+                    }}
                     onChange={(e, newValue) => {
                       onChange(newValue ? newValue.id : null);
                     }}
                     id="controllable-states-demo"
-                    options={data || potions}
+                    options={filteredOptions}
                     renderInput={(params) => (
                       <TextField
                         {...params}
