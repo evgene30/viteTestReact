@@ -17,45 +17,36 @@ export const DataTable = memo((): JSX.Element => {
 
   useEffect(() => {
     if (searchText && users?.length) {
+      console.log('Search Text:', searchText);
+      console.log('Users:', users);
+
+      let filteredUsers;
       // eslint-disable-next-line no-restricted-globals
       if (!isNaN(Number(searchText))) {
-        const filteredUsers = users.filter(
-          (user) => user.id === Number(searchText),
-        );
-        if (filteredUsers?.length && searchText) {
-          const component = (
-            <SelectLabels
-              closeModal={closeModal}
-              data={filteredUsers}
-              setDeleteSearchTextAction={setDeleteSearchTextAction}
-            />
-          );
-          openModal({ component, title: 'Search result' });
-        }
+        filteredUsers = users.filter((user) => user.id === Number(searchText));
       } else {
-        const filteredUsers = users.filter((user) =>
+        filteredUsers = users.filter((user) =>
           user.name.toLowerCase().includes(searchText.toLowerCase()),
         );
-        if (filteredUsers?.length && searchText) {
-          const component = (
-            <SelectLabels
-              closeModal={closeModal}
-              data={filteredUsers}
-              setDeleteSearchTextAction={setDeleteSearchTextAction}
-            />
-          );
-          openModal({ component, title: 'Search result' });
-        }
+      }
+
+      console.log('Filtered Users:', filteredUsers);
+
+      // Проверяем наличие совпадений перед вызовом модального окна
+      if (filteredUsers?.length && searchText) {
+        const component = (
+          <SelectLabels
+            closeModal={closeModal}
+            data={filteredUsers}
+            setDeleteSearchTextAction={setDeleteSearchTextAction}
+          />
+        );
+
+        openModal({ component, title: 'Search result' });
       }
     }
-  }, [
-    closeModal,
-    openModal,
-    searchText,
-    setDeleteSearchTextAction,
-    users,
-    users?.length,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText]);
 
   const apiRef = useGridApiRef();
 

@@ -73,15 +73,13 @@ export const SelectLabels = ({
       switch: true,
     },
   });
-  const filteredOptions = data
-    ? data.map((option: Search | Option) => {
-        if (option instanceof Option) {
-          return option;
-        }
+  const filteredOptions = data?.map((option: Search | Option) => {
+    if (option instanceof Option) {
+      return option;
+    }
 
-        return null;
-      })
-    : potions;
+    return null;
+  });
 
   return (
     <form>
@@ -118,7 +116,7 @@ export const SelectLabels = ({
                       onChange(newValue ? newValue.id : null);
                     }}
                     id="controllable-states-demo"
-                    options={filteredOptions}
+                    options={filteredOptions as never}
                     renderInput={(params) => (
                       <TextField
                         {...params}
