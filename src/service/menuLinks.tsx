@@ -2,6 +2,7 @@ import { About } from '@/pages/about/About';
 import { Home } from '@/pages/home/Home';
 import { getLoadUsers } from '@/routes/loaders/getLoadUsers';
 import { Work } from '@/pages/work/Work';
+import { PrivateRoute } from '@/layout/PrivateRoute';
 
 export const menuLinks = [
   {
@@ -21,12 +22,22 @@ export const menuLinks = [
     link: '/work',
     title: 'Work',
     path: '/work',
-    element: <Work />,
+    element: (
+      <PrivateRoute>
+        <Work />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: '/work/:contactId',
         element: <div>Contact</div>,
       },
     ],
+  },
+  {
+    link: '/login',
+    title: 'Login',
+    path: '/login',
+    element: <div>Login</div>,
   },
 ];
