@@ -3,6 +3,7 @@ import { Home } from '@/pages/home/Home';
 import { getLoadUsers } from '@/routes/loaders/getLoadUsers';
 import { Work } from '@/pages/work/Work';
 import { PrivateRoute } from '@/layout/PrivateRoute';
+import { LoginPage } from '@/pages/login/LoginPage';
 
 export const menuLinks = [
   {
@@ -38,6 +39,6 @@ export const menuLinks = [
     link: '/login',
     title: 'Login',
     path: '/login',
-    element: <div>Login</div>,
+    element: <LoginPage />,
   },
 ];
