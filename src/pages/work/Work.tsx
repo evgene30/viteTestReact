@@ -1,11 +1,12 @@
 import { Box, Button } from '@mui/material';
-import { SyntheticEvent, useLayoutEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 
 import { workStyle } from './style';
 import { CustomSnackbar } from '@/components/snackbar/CustomSnackbar';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 export const Work = () => {
-  const [buttonStatus, setButtonStatus] = useState(false);
+  const { value, setValue } = useLocalStorage('buttonStatus', false);
   const [open, setOpen] = useState(false);
 
   const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
@@ -16,33 +17,19 @@ export const Work = () => {
     setOpen(false);
   };
 
-  useLayoutEffect(() => {
-    const savedStatus = localStorage.getItem('buttonStatus');
-    if (savedStatus) {
-      setButtonStatus(JSON.parse(savedStatus) as boolean);
-    }
-  }, []);
-
   const handleButtonClick = () => {
-    const newStatus = !buttonStatus;
-    setButtonStatus(newStatus);
-    localStorage.setItem('buttonStatus', JSON.stringify(newStatus));
+    setValue(!value);
     setOpen(false);
   };
 
   const handleCheckStatusAndRerender = (): void => {
-    const savedStatus = JSON.parse(localStorage.getItem('buttonStatus') || '');
-    if (savedStatus) {
-      console.log(savedStatus);
-    }
-
     setOpen(true);
   };
 
   return (
     <>
       <Box sx={workStyle}>
-        {buttonStatus ? (
+        {value ? (
           <Button
             variant="contained"
             color="success"
@@ -67,7 +54,7 @@ export const Work = () => {
       <CustomSnackbar
         openBar={open}
         handleClose={handleClose}
-        loadStatus={buttonStatus}
+        loadStatus={value as boolean}
       />
     </>
   );
