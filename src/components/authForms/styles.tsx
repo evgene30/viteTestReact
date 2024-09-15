@@ -174,7 +174,6 @@ export const loginStyle = (theme: Theme) => ({
   '.social-container': {
     margin: '20px 0',
     a: {
-      border: '1px solid #dddddd',
       borderRadius: '50%',
       display: 'inline-flex',
       justifyContent: 'center',
@@ -182,6 +181,10 @@ export const loginStyle = (theme: Theme) => ({
       margin: '0 5px',
       height: '40px',
       width: '40px',
+    },
+    'a:hover': {
+      transition: '0.5s',
+      opacity: '0.3',
     },
   },
   footer: {

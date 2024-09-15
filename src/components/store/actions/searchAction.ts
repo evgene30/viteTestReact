@@ -1,11 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
 import { setDeleteSearchText, setSearchText } from '../searchSlice';
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { getSearchText } from '../selector';
 
 export const useSearchActions = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const searchText = useAppSelector(getSearchText);
 
   const setSearchTextAction = (text: string) => {

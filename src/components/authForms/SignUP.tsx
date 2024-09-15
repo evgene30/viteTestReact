@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { SocialContainer } from '@/components/authForms/SocialContainer';
 
 export const SingUP = () => {
   const [state, setState] = useState({
@@ -33,17 +33,7 @@ export const SingUP = () => {
     <Box className="form-container sign-up-container">
       <form onSubmit={handleOnSubmit}>
         <h1>Create Account</h1>
-        <Box className="social-container">
-          <Link to="https://www.facebook.com" className="social">
-            <i className="fab fa-facebook-f" />
-          </Link>
-          <Link to="https://www.google.com" className="social">
-            <i className="fab fa-google-plus-g" />
-          </Link>
-          <Link to="https://www.linkedin.com" className="social">
-            <i className="fab fa-linkedin-in" />
-          </Link>
-        </Box>
+        <SocialContainer />
         <span>or use your email for registration</span>
         <input
           type="text"
