@@ -23,6 +23,7 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 import { Task } from '../draggable/Task';
+import { useValidateContextForm } from '@/hooks/useValidateContextForm';
 
 interface LinkTabProps {
   selected?: boolean;
@@ -192,6 +193,7 @@ const LinkTab: FC<LinkTabProps> = memo((props) => {
 });
 
 export function NavTabs() {
+  const { formObjects } = useValidateContextForm();
   const [tabs, setTabs] = useState([
     { label: 'Page One', href: 'drafts' },
     { label: 'Page Two', href: 'trash' },
@@ -222,6 +224,7 @@ export function NavTabs() {
 
     setTabs(arrayMove(tabs, originalPos, newPos));
   };
+  console.log(formObjects);
 
   return (
     <DndContext

@@ -9,8 +9,10 @@ import { columnsConfig } from './tableConfig';
 import { useSearchActions } from '../store/actions/searchAction';
 import { SelectLabels } from '../select';
 import { useModal } from '../modal/ModalContext';
+import { useValidateContextForm } from '@/hooks/useValidateContextForm';
 
 export const DataTable = memo((): JSX.Element => {
+  const { addFormObject } = useValidateContextForm();
   const { openModal, closeModal, isOpen } = useModal();
   const { searchText, setDeleteSearchTextAction } = useSearchActions();
   const { users } = useLoaderData() as LoadUsersType;
@@ -44,7 +46,9 @@ export const DataTable = memo((): JSX.Element => {
 
         openModal({ component, title: 'Search result' });
       }
+      // addFormObject({ id: 'search', data: filteredUsers });
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
