@@ -55,6 +55,7 @@ export const SingUP = () => {
           value={state.password}
           onChange={handleChange}
           placeholder="Password"
+          style={{ marginBottom: '25px' }}
         />
         <Button type="submit">Sign Up</Button>
       </form>

@@ -41,6 +41,11 @@ export const loginStyle = (theme: Theme) => ({
     textTransform: 'uppercase',
     transition: 'transform 80ms ease-in',
   },
+  'button:hover': {
+    cursor: 'pointer',
+    opacity: 0.7,
+    backgroundColor: theme.palette.primary.main,
+  },
   'button:active': {
     transform: 'scale(0.95)',
   },
@@ -48,6 +53,7 @@ export const loginStyle = (theme: Theme) => ({
     outline: 'none',
   },
   'button.ghost': {
+    margin: '8px 0',
     backgroundColor: 'transparent',
     borderColor: '#ffffff',
   },
@@ -71,8 +77,7 @@ export const loginStyle = (theme: Theme) => ({
   '.container': {
     backgroundColor: '#fff',
     borderRadius: '10px',
-    boxShadow:
-      '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)',
+    boxShadow: '1px 1px 16px -3px rgba(34, 60, 80, 0.33)',
     position: 'relative',
     overflow: 'hidden',
     width: '768px',
