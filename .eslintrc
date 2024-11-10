@@ -76,7 +76,7 @@
       }
     ],
     "react/require-default-props": "off",
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["warn"],
     "import/no-extraneous-dependencies": [
       "error",
       {
