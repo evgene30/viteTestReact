@@ -11,11 +11,13 @@ export interface Option {
 interface MyTableComponentProps {
   options: Option[];
   setOptions: React.Dispatch<React.SetStateAction<Option[]>>;
+  data: Option[];
 }
 
 export const TableComponent: React.FC<MyTableComponentProps> = ({
   options,
   setOptions,
+  data,
 }) => {
   const handleDelete = (record: Option) => {
     setOptions(options.filter((item) => item.field !== record.field));
@@ -45,14 +47,22 @@ export const TableComponent: React.FC<MyTableComponentProps> = ({
     );
   };
 
-  console.log(options);
-
   const columns = [
     {
       title: 'Индекс',
       dataIndex: 'Индекс',
       key: 'Индекс',
-      render: (text: string, record: Option, index: number) => `${index + 1}`,
+      render: (text: string, record: Option, index: number) => (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {index + 1}
+        </div>
+      ),
       width: '5%',
     },
     {
@@ -85,11 +95,7 @@ export const TableComponent: React.FC<MyTableComponentProps> = ({
           <Select
             value={record.link}
             placeholder="Выберите параметр"
-            options={[
-              { value: 'jack', label: 'Jack' },
-              { value: 'lucy', label: 'Lucy' },
-              { value: 'Yimi', label: 'yimi' },
-            ]}
+            options={data || []}
             style={{ width: '100%' }}
             onChange={(value) => handleChange(value, record)}
           />
@@ -101,10 +107,18 @@ export const TableComponent: React.FC<MyTableComponentProps> = ({
       key: 'action',
       width: '5%',
       render: (text: string, record: Option) => (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Tooltip title="Удалить">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Tooltip
+            title={`Удалить ${record.label}`}
+            styles={{ root: { fontSize: '12px', fontWeight: '500' } }}
+          >
             <Button
-              size="large"
+              size="middle"
               shape="circle"
               type="text"
               icon={<DeleteOutlined />}
