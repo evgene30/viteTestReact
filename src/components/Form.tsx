@@ -63,7 +63,7 @@ export const FormComponent: FC = () => {
           <Submit
             onSubmit={(val) => {
               if (val.Код === '123') {
-                const fieldSelect: Field = form.fields['Селект'];
+                const fieldSelect: any = form.fields['Селект'];
                 console.log(fieldSelect);
                 fieldSelect.visible = true;
                 fieldSelect.props.component[1].options = [
