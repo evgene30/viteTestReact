@@ -115,7 +115,7 @@ export const TableComponent: React.FC<MyTableComponentProps> = ({
         >
           <Tooltip
             title={`Удалить ${record.label}`}
-            styles={{ root: { fontSize: '12px', fontWeight: '500' } }}
+            styles={{ root: { fontSize: '12px', opacity: '0.9' } }}
           >
             <Button
               size="middle"
