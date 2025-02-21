@@ -1,17 +1,47 @@
-import { createForm, IFieldFactoryProps } from '@formily/core';
-import { FormProvider, FormConsumer, Field } from '@formily/react';
-import {
-  FormItem,
-  FormLayout,
-  Input,
-  FormButtonGroup,
-  Submit,
-  Select,
-} from '@formily/antd-v5';
-import { FC } from 'react';
+import { Field, createForm } from '@formily/core';
+import { FormProvider, createSchemaField } from '@formily/react';
+import { FormItem, Input, Select } from '@formily/antd-v5';
+import { FC, useEffect, useMemo } from 'react';
+import { useGetData } from '@/hooks/useGetData';
+
+const SchemaField = createSchemaField({
+  components: {
+    Input,
+    Select,
+    FormItem,
+  },
+});
+
+const form = createForm();
 
 export const FormComponent: FC = () => {
-  const form = createForm();
+  const options = useGetData('https://fakestoreapi.com/products');
+
+  useEffect(() => {
+    if (options?.length) {
+      form.setFieldState('select', (state) => {
+        (state as Field).setDataSource(options);
+      });
+    }
+  }, [options]);
+
+  const schema = useMemo(
+    () => (
+      <SchemaField>
+        <SchemaField.String
+          name="input"
+          x-component="Input"
+          x-decorator="FormItem"
+        />
+        <SchemaField.String
+          name="select"
+          x-decorator="FormItem"
+          x-component="Select"
+        />
+      </SchemaField>
+    ),
+    [],
+  );
 
   return (
     <div
@@ -19,65 +49,7 @@ export const FormComponent: FC = () => {
         paddingTop: 10,
       }}
     >
-      <FormProvider form={form}>
-        <FormLayout layout="vertical">
-          <Field
-            name="Код"
-            title="Ведите текст"
-            required
-            decorator={[FormItem]}
-            component={[Input]}
-          />
-        </FormLayout>
-        <FormLayout layout="vertical">
-          <Field
-            name="Селект"
-            required
-            decorator={[FormItem]}
-            title="Выберите значение"
-            component={[
-              Select,
-              {
-                placeholder: 'Выберите значение',
-                options: [{ label: '2', value: '2' }],
-                allowClear: true,
-              },
-            ]}
-            visible={false}
-          />
-        </FormLayout>
-        <FormConsumer>
-          {() => (
-            <div
-              style={{
-                marginBottom: 20,
-                padding: 5,
-                border: '1px solid #666',
-              }}
-            >
-              Real-time response：{form.values['Код']}
-            </div>
-          )}
-        </FormConsumer>
-        <FormButtonGroup>
-          <Submit
-            onSubmit={(val) => {
-              if (val.Код === '123') {
-                const fieldSelect: any = form.fields['Селект'];
-                console.log(fieldSelect);
-                fieldSelect.visible = true;
-                fieldSelect.props.component[1].options = [
-                  { label: '1', value: '1' },
-                ];
-              } else {
-                form.setValues(val);
-              }
-            }}
-          >
-            Submit
-          </Submit>
-        </FormButtonGroup>
-      </FormProvider>
+      <FormProvider form={form}>{schema}</FormProvider>
     </div>
   );
 };

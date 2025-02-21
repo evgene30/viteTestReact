@@ -70,6 +70,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ant-design/cssinjs@npm:^1.3.1":
+  version: 1.23.0
+  resolution: "@ant-design/cssinjs@npm:1.23.0"
+  dependencies:
+    "@babel/runtime": ^7.11.1
+    "@emotion/hash": ^0.8.0
+    "@emotion/unitless": ^0.7.5
+    classnames: ^2.3.1
+    csstype: ^3.1.3
+    rc-util: ^5.35.0
+    stylis: ^4.3.4
+  peerDependencies:
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 45461c9caa8043e4f6061ea72921ff00d0c5c8e5fd8420b2abc2576f799c758f4590a44c69c10e666c918b248fb6a318a5cf1b1429fd5bdd31dfde32ae764e9f
+  languageName: node
+  linkType: hard
+
 "@ant-design/fast-color@npm:^2.0.6":
   version: 2.0.6
   resolution: "@ant-design/fast-color@npm:2.0.6"
@@ -83,6 +101,22 @@ __metadata:
   version: 4.4.2
   resolution: "@ant-design/icons-svg@npm:4.4.2"
   checksum: c66cda4533ec2f86162a9adda04be2aba5674d5c758ba886bd9d8de89dc45473ef3124eb755b4cfbd09121d3bdc34e075ee931e47dd0f8a7fdc01be0cb3d6c40
+  languageName: node
+  linkType: hard
+
+"@ant-design/icons@npm:^5.0.0":
+  version: 5.6.0
+  resolution: "@ant-design/icons@npm:5.6.0"
+  dependencies:
+    "@ant-design/colors": ^7.0.0
+    "@ant-design/icons-svg": ^4.4.0
+    "@babel/runtime": ^7.24.8
+    classnames: ^2.2.6
+    rc-util: ^5.31.1
+  peerDependencies:
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: e2a5d58517520187833b7bc86835dace27bb2391926014ac861baa37e6c76327d9e30d5f20f04db97505b42b0a9873c1e0833b719fe2fa9d62127125a4d509c1
   languageName: node
   linkType: hard
 
@@ -1860,6 +1894,55 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dnd-kit/accessibility@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@dnd-kit/accessibility@npm:3.1.1"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: f71b98b29e005d15c1300922b201bea9189aceeb15662e6e86231034f72b53812566361f8c14b0521278ac104f9703ca069d43f2c73862ea10181a2211ca5b27
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/core@npm:^6.0.0":
+  version: 6.3.1
+  resolution: "@dnd-kit/core@npm:6.3.1"
+  dependencies:
+    "@dnd-kit/accessibility": ^3.1.1
+    "@dnd-kit/utilities": ^3.2.2
+    tslib: ^2.0.0
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: abe5ca5c63af2652b50df2636111a8eecb1560338f3b57e27af0d4eac31f89a278347049dbd59897aeec262477ef88d7a906a79254360c40480e490ee910947c
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/sortable@npm:^7.0.0":
+  version: 7.0.2
+  resolution: "@dnd-kit/sortable@npm:7.0.2"
+  dependencies:
+    "@dnd-kit/utilities": ^3.2.0
+    tslib: ^2.0.0
+  peerDependencies:
+    "@dnd-kit/core": ^6.0.7
+    react: ">=16.8.0"
+  checksum: 4ce705aceb15766a0deefe25a9d95a87e9413c3fb9088ea3eb0962e57f844895000117fcec7c0944a0d4ae4e1e889cfa69e3d3778164d4d23115fb1edb218283
+  languageName: node
+  linkType: hard
+
+"@dnd-kit/utilities@npm:^3.2.0, @dnd-kit/utilities@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@dnd-kit/utilities@npm:3.2.2"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 8a5015c2faa52760ab82a64287b2ac6a3d798867a1bca5ccbc1178560dbd9a1f9f1a21faea80f590ba1a4277c3eb7e7c4d3b4a39f1f32171bf6bc8174b370547
+  languageName: node
+  linkType: hard
+
 "@emotion/hash@npm:^0.8.0":
   version: 0.8.0
   resolution: "@emotion/hash@npm:0.8.0"
@@ -2067,6 +2150,155 @@ __metadata:
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
   checksum: 03a7704150b868c318aab6a94d87a33d30dc2ec579d27374575014f06237ba1370ae11178db772f985ef680d469dc237e7b16a1c5d8edaaeb8c3733e7a95a6d3
+  languageName: node
+  linkType: hard
+
+"@formily/antd-v5@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@formily/antd-v5@npm:1.2.3"
+  dependencies:
+    "@ant-design/cssinjs": ^1.3.1
+    "@ant-design/icons": ^5.0.0
+    "@dnd-kit/core": ^6.0.0
+    "@dnd-kit/sortable": ^7.0.0
+    "@formily/core": ^2.2.0
+    "@formily/grid": ^2.2.0
+    "@formily/json-schema": ^2.2.0
+    "@formily/react": ^2.2.0
+    "@formily/reactive": ^2.2.0
+    "@formily/reactive-react": ^2.2.0
+    "@formily/shared": ^2.2.0
+    classnames: ^2.2.6
+    react-sticky-box: ^1.0.2
+  peerDependencies:
+    "@types/react": ">=16.8.0 || >=17.0.0"
+    "@types/react-dom": ">=16.8.0 || >=17.0.0"
+    antd: ^5.13.0
+    react: ">=16.8.0 || >=17.0.0"
+    react-dom: ">=16.8.0"
+    react-is: ">=16.8.0 || >=17.0.0"
+  checksum: 636d4e552c30addde10c361311733835124250b9ec8ccd79c06543f99524707b7113996fc05b285b7f1138c66d9652ecd1a2b7ada7e174c12d781c63643bebb8
+  languageName: node
+  linkType: hard
+
+"@formily/core@npm:2.3.2, @formily/core@npm:^2.2.0, @formily/core@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@formily/core@npm:2.3.2"
+  dependencies:
+    "@formily/reactive": 2.3.2
+    "@formily/shared": 2.3.2
+    "@formily/validator": 2.3.2
+  checksum: d4bcfc6489b999f5d11a78c0071a79f6305194a460d411610194ccedfe53ab32431594ef3f069b1ea2202325b11ac153d71e48e2694b7d9b45033763c0054adb
+  languageName: node
+  linkType: hard
+
+"@formily/grid@npm:^2.2.0":
+  version: 2.3.2
+  resolution: "@formily/grid@npm:2.3.2"
+  dependencies:
+    "@formily/reactive": 2.3.2
+    "@juggle/resize-observer": ^3.3.1
+  peerDependencies:
+    typescript: 4.x || 5.x
+  checksum: 1e743310cf70b330077fe475f5b33a1d8c6aa76e1d21d7673715410c99606c33d75eb64e02088e237ce7b7cc189351099ebfa0f05a05fa3d5ce09f2fdc35435f
+  languageName: node
+  linkType: hard
+
+"@formily/json-schema@npm:2.3.2, @formily/json-schema@npm:^2.2.0":
+  version: 2.3.2
+  resolution: "@formily/json-schema@npm:2.3.2"
+  dependencies:
+    "@formily/core": 2.3.2
+    "@formily/reactive": 2.3.2
+    "@formily/shared": 2.3.2
+  peerDependencies:
+    typescript: ">4.1.5"
+  checksum: 44ba7d6774da9422d468bd8dd848be46cd15abc64e5dffbb2b2b706d44216ceaffa49a16b12239f428e26f702051d60717bb701e868faebb7ad2157694f3dcb9
+  languageName: node
+  linkType: hard
+
+"@formily/path@npm:2.3.2":
+  version: 2.3.2
+  resolution: "@formily/path@npm:2.3.2"
+  checksum: 4842cd0f613e0f14d1a2e508589c029b05498c9c2866e3f84b14380d2c89c73645fe6f68a88ebfc9d0b0f80556e11870539a31b53bfbe029b5851bfe5b0f8a0a
+  languageName: node
+  linkType: hard
+
+"@formily/react@npm:^2.2.0, @formily/react@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@formily/react@npm:2.3.2"
+  dependencies:
+    "@formily/core": 2.3.2
+    "@formily/json-schema": 2.3.2
+    "@formily/reactive": 2.3.2
+    "@formily/reactive-react": 2.3.2
+    "@formily/shared": 2.3.2
+    "@formily/validator": 2.3.2
+    hoist-non-react-statics: ^3.3.2
+  peerDependencies:
+    "@types/react": ">=16.8.0"
+    "@types/react-dom": ">=16.8.0"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+    react-is: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 04c945c5bdc0d0e718de76dc1d1f833f07f07fa459b2092b331016ce8b9aed62f9d57d81e253f2096c4b3127f8f56e269d3f03c62c410af86f34f63a07de6946
+  languageName: node
+  linkType: hard
+
+"@formily/reactive-react@npm:2.3.2, @formily/reactive-react@npm:^2.2.0":
+  version: 2.3.2
+  resolution: "@formily/reactive-react@npm:2.3.2"
+  dependencies:
+    "@formily/reactive": 2.3.2
+    hoist-non-react-statics: ^3.3.2
+  peerDependencies:
+    "@types/react": ">=16.8.0"
+    "@types/react-dom": ">=16.8.0"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+    react-is: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 1aadecdffe2570990783a050a89bf5aaff181c12a334d74ee6f9513a8299f3d0ce7db730c70fd577f167cf6d30b4b30bbba1e97a699333891418cbbd4d047f7b
+  languageName: node
+  linkType: hard
+
+"@formily/reactive@npm:2.3.2, @formily/reactive@npm:^2.2.0":
+  version: 2.3.2
+  resolution: "@formily/reactive@npm:2.3.2"
+  checksum: 1c3dbd66b8f25d86a9e0281ac30888aae91a8565939a7809eb6397ad83bc80d6ea0499d3048577198bf01b93cf2bff8d1e67a4e7b7638d15b5ae451ded6cbe8e
+  languageName: node
+  linkType: hard
+
+"@formily/shared@npm:2.3.2, @formily/shared@npm:^2.2.0":
+  version: 2.3.2
+  resolution: "@formily/shared@npm:2.3.2"
+  dependencies:
+    "@formily/path": 2.3.2
+    camel-case: ^4.1.1
+    lower-case: ^2.0.1
+    no-case: ^3.0.4
+    param-case: ^3.0.4
+    pascal-case: ^3.1.1
+    upper-case: ^2.0.1
+  checksum: fa347707aa067f909e6cc5d11e6cccb7ac88a86e873c1c1fc70d0786b879d390d62e45d908c97f681a259b511fed7a644b4500f9bbfbd182e1cb828638226434
+  languageName: node
+  linkType: hard
+
+"@formily/validator@npm:2.3.2":
+  version: 2.3.2
+  resolution: "@formily/validator@npm:2.3.2"
+  dependencies:
+    "@formily/shared": 2.3.2
+  checksum: 3fcf27a5f0fe11f4747328b5541a3aec05c09ff44e09aedb7bee0f976221cc7ed5b1172b5def8320920983ed428b4af1cdba5fed292b090a4fbd5a90355d6cac
   languageName: node
   linkType: hard
 
@@ -2383,6 +2615,13 @@ __metadata:
     "@jridgewell/resolve-uri": ^3.1.0
     "@jridgewell/sourcemap-codec": ^1.4.14
   checksum: 9d3c40d225e139987b50c48988f8717a54a8c994d8a948ee42e1412e08988761d0754d7d10b803061cc3aebf35f92a5dbbab493bd0e1a9ef9e89a2130e83ba34
+  languageName: node
+  linkType: hard
+
+"@juggle/resize-observer@npm:^3.3.1":
+  version: 3.4.0
+  resolution: "@juggle/resize-observer@npm:3.4.0"
+  checksum: 2505028c05cc2e17639fcad06218b1c4b60f932a4ebb4b41ab546ef8c157031ae377e3f560903801f6d01706dbefd4943b6c4704bf19ed86dfa1c62f1473a570
   languageName: node
   linkType: hard
 
@@ -4091,6 +4330,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"camel-case@npm:^4.1.1":
+  version: 4.1.2
+  resolution: "camel-case@npm:4.1.2"
+  dependencies:
+    pascal-case: ^3.1.2
+    tslib: ^2.0.3
+  checksum: bcbd25cd253b3cbc69be3f535750137dbf2beb70f093bdc575f73f800acc8443d34fd52ab8f0a2413c34f1e8203139ffc88428d8863e4dfe530cfb257a379ad6
+  languageName: node
+  linkType: hard
+
 "camelcase@npm:^5.3.1":
   version: 5.3.1
   resolution: "camelcase@npm:5.3.1"
@@ -4723,6 +4972,16 @@ __metadata:
   dependencies:
     webidl-conversions: ^7.0.0
   checksum: ddbc1268edf33a8ba02ccc596735ede80375ee0cf124b30d2f05df5b464ba78ef4f49889b6391df4a04954e63d42d5631c7fcf8b1c4f12bc531252977a5f13d5
+  languageName: node
+  linkType: hard
+
+"dot-case@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "dot-case@npm:3.0.4"
+  dependencies:
+    no-case: ^3.0.4
+    tslib: ^2.0.3
+  checksum: a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
   languageName: node
   linkType: hard
 
@@ -6060,6 +6319,15 @@ __metadata:
   dependencies:
     function-bind: ^1.1.2
   checksum: e8516f776a15149ca6c6ed2ae3110c417a00b62260e222590e54aa367cbcd6ed99122020b37b7fbdf05748df57b265e70095d7bf35a47660587619b15ffb93db
+  languageName: node
+  linkType: hard
+
+"hoist-non-react-statics@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "hoist-non-react-statics@npm:3.3.2"
+  dependencies:
+    react-is: ^16.7.0
+  checksum: b1538270429b13901ee586aa44f4cc3ecd8831c061d06cb8322e50ea17b3f5ce4d0e2e66394761e6c8e152cd8c34fb3b4b690116c6ce2bd45b18c746516cb9e8
   languageName: node
   linkType: hard
 
@@ -7572,6 +7840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lower-case@npm:^2.0.1, lower-case@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "lower-case@npm:2.0.2"
+  dependencies:
+    tslib: ^2.0.3
+  checksum: 83a0a5f159ad7614bee8bf976b96275f3954335a84fad2696927f609ddae902802c4f3312d86668722e668bef41400254807e1d3a7f2e8c3eede79691aa1f010
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^10.0.1, lru-cache@npm:^10.2.0":
   version: 10.2.0
   resolution: "lru-cache@npm:10.2.0"
@@ -7866,6 +8143,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"moment@npm:^2.30.1":
+  version: 2.30.1
+  resolution: "moment@npm:2.30.1"
+  checksum: 859236bab1e88c3e5802afcf797fc801acdbd0ee509d34ea3df6eea21eb6bcc2abd4ae4e4e64aa7c986aa6cba563c6e62806218e6412a765010712e5fa121ba6
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -7907,6 +8191,16 @@ __metadata:
   version: 1.0.5
   resolution: "nice-try@npm:1.0.5"
   checksum: 0b4af3b5bb5d86c289f7a026303d192a7eb4417231fe47245c460baeabae7277bcd8fd9c728fb6bd62c30b3e15cd6620373e2cf33353b095d8b403d3e8a15aff
+  languageName: node
+  linkType: hard
+
+"no-case@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "no-case@npm:3.0.4"
+  dependencies:
+    lower-case: ^2.0.2
+    tslib: ^2.0.3
+  checksum: 0b2ebc113dfcf737d48dde49cfebf3ad2d82a8c3188e7100c6f375e30eafbef9e9124aadc3becef237b042fd5eb0aad2fd78669c20972d045bbe7fea8ba0be5c
   languageName: node
   linkType: hard
 
@@ -8203,6 +8497,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"param-case@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "param-case@npm:3.0.4"
+  dependencies:
+    dot-case: ^3.0.4
+    tslib: ^2.0.3
+  checksum: b34227fd0f794e078776eb3aa6247442056cb47761e9cd2c4c881c86d84c64205f6a56ef0d70b41ee7d77da02c3f4ed2f88e3896a8fefe08bdfb4deca037c687
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -8240,6 +8544,16 @@ __metadata:
   dependencies:
     entities: ^4.4.0
   checksum: 59465dd05eb4c5ec87b76173d1c596e152a10e290b7abcda1aecf0f33be49646ea74840c69af975d7887543ea45564801736356c568d6b5e71792fd0f4055713
+  languageName: node
+  linkType: hard
+
+"pascal-case@npm:^3.1.1, pascal-case@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "pascal-case@npm:3.1.2"
+  dependencies:
+    no-case: ^3.0.4
+    tslib: ^2.0.3
+  checksum: ba98bfd595fc91ef3d30f4243b1aee2f6ec41c53b4546bfa3039487c367abaa182471dcfc830a1f9e1a0df00c14a370514fa2b3a1aacc68b15a460c31116873e
   languageName: node
   linkType: hard
 
@@ -9102,7 +9416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1":
+"react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
@@ -9158,6 +9472,17 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: b31c187e3fdcdf7294ffdad6ff834e14d012840c94d8ee8c7fbe451062a8fcb6e31e8bc7827fb1ff45445dd40fad2b8c96a7e98f0ac1c3eb1d716c257a0821c9
+  languageName: node
+  linkType: hard
+
+"react-sticky-box@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "react-sticky-box@npm:1.0.2"
+  dependencies:
+    resize-observer-polyfill: ^1.5.1
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 60ddc90ff2bc8c0597f8de8ca8f287dc20eff0f4d484225f35e426937cc5af223913a57efd63b68afbdbccae97be89416b01823977d21325ac96681277f719ca
   languageName: node
   linkType: hard
 
@@ -10371,6 +10696,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.0.0, tslib@npm:^2.0.3":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
+  languageName: node
+  linkType: hard
+
 "tsutils@npm:^3.21.0":
   version: 3.21.0
   resolution: "tsutils@npm:3.21.0"
@@ -10617,6 +10949,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"upper-case@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "upper-case@npm:2.0.2"
+  dependencies:
+    tslib: ^2.0.3
+  checksum: 508723a2b03ab90cf1d6b7e0397513980fab821cbe79c87341d0e96cedefadf0d85f9d71eac24ab23f526a041d585a575cfca120a9f920e44eb4f8a7cf89121c
+  languageName: node
+  linkType: hard
+
 "uri-js@npm:^4.2.2":
   version: 4.4.1
   resolution: "uri-js@npm:4.4.1"
@@ -10783,6 +11124,9 @@ __metadata:
     "@babel/preset-env": ^7.24.3
     "@babel/preset-react": ^7.24.1
     "@babel/preset-typescript": ^7.24.1
+    "@formily/antd-v5": ^1.2.3
+    "@formily/core": ^2.3.2
+    "@formily/react": ^2.3.2
     "@testing-library/jest-dom": ^6.4.2
     "@testing-library/react": ^14.2.2
     "@types/jest": ^29.5.12
@@ -10816,6 +11160,7 @@ __metadata:
     jest-svg-transformer: ^1.0.0
     lint-staged: ^15.2.7
     lodash: 4.17.21
+    moment: ^2.30.1
     npm-run-all: 4.1.5
     prettier: 2.8.0
     react: 18.2.0
