@@ -1,5 +1,3 @@
-import { Option } from '../components/Table';
-
 const generateRandomName = (): string => {
   const vowels = 'aeiou';
   const consonants = 'bcdfghjklmnpqrstvwxyz';
@@ -18,8 +16,8 @@ const generateRandomName = (): string => {
   return result.charAt(0).toUpperCase() + result.slice(1).toLowerCase();
 };
 
-export const generateRandomOptions = (count: number): Option[] => {
-  const options: Option[] = [];
+export const generateRandomOptions = (count: number): any[] => {
+  const options: any[] = [];
   for (let i = 0; i < count; i += 1) {
     options.push({
       label: generateRandomName(),
