@@ -16,7 +16,7 @@ export const useGetData = (url: string): TData[] | undefined => {
           setData(
             res.data.map((item) => ({
               label: item.title,
-              value: item.category,
+              value: item.title,
               key: item.id,
             })),
           );
